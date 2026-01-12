@@ -22,6 +22,9 @@ export const DEFAULT_AZURE_CONFIG = {
   model: "gpt-4.1",
 };
 
+// 默认后端地址
+export const DEFAULT_BACKEND_URL = "http://127.0.0.1:2024";
+
 interface ConfigDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -35,6 +38,11 @@ export function ConfigDialog({
   onSave,
   initialConfig,
 }: ConfigDialogProps) {
+  // 后端地址配置
+  const [backendUrl, setBackendUrl] = useState(
+    initialConfig?.deploymentUrl || DEFAULT_BACKEND_URL
+  );
+
   // Azure OpenAI 配置
   const [azureEndpoint, setAzureEndpoint] = useState(
     initialConfig?.openRouterConfig?.baseUrl || DEFAULT_AZURE_CONFIG.endpoint
@@ -54,6 +62,7 @@ export function ConfigDialog({
   // 同步初始配置
   useEffect(() => {
     if (open) {
+      setBackendUrl(initialConfig?.deploymentUrl || DEFAULT_BACKEND_URL);
       setAzureEndpoint(initialConfig?.openRouterConfig?.baseUrl || DEFAULT_AZURE_CONFIG.endpoint);
       setAzureApiKey(initialConfig?.openRouterConfig?.apiKey || DEFAULT_AZURE_CONFIG.apiKey);
       setAzureModel(initialConfig?.selectedModel || DEFAULT_AZURE_CONFIG.model);
@@ -90,7 +99,7 @@ export function ConfigDialog({
   };
 
   const handleSave = async () => {
-    if (!azureEndpoint || !azureApiKey || !azureModel) {
+    if (!backendUrl || !azureEndpoint || !azureApiKey || !azureModel) {
       alert("Please fill in all required fields");
       return;
     }
@@ -99,7 +108,7 @@ export function ConfigDialog({
 
     // 保存到 localStorage
     onSave({
-      deploymentUrl: "http://127.0.0.1:2024",
+      deploymentUrl: backendUrl,
       assistantId: "agent",
       activeProvider: "azure",
       selectedModel: azureModel,
@@ -151,15 +160,35 @@ export function ConfigDialog({
             Settings
           </DialogTitle>
           <DialogDescription>
-            Configure Azure OpenAI API
+            Configure backend and Azure OpenAI API
           </DialogDescription>
         </DialogHeader>
 
         <div className="grid gap-4 py-4">
-                      <div className="grid gap-2">
+          {/* 后端地址配置 */}
+          <div className="grid gap-2">
+            <Label htmlFor="backendUrl" className="text-sm font-medium">
+              Backend URL
+            </Label>
+            <Input
+              id="backendUrl"
+              placeholder="http://127.0.0.1:2024 or https://xxx.ngrok-free.app"
+              value={backendUrl}
+              onChange={(e) => setBackendUrl(e.target.value)}
+            />
+            <p className="text-xs text-muted-foreground">
+              Local: http://127.0.0.1:2024 | Remote: your ngrok URL
+            </p>
+          </div>
+
+          <div className="border-t pt-4">
+            <p className="text-sm font-medium mb-3">Azure OpenAI Configuration</p>
+          </div>
+
+          <div className="grid gap-2">
             <Label htmlFor="endpoint" className="text-sm">
               Endpoint URL
-                        </Label>
+            </Label>
                       <Input
               id="endpoint"
               placeholder="https://xxx.openai.azure.com/openai/deployments/xxx/chat/completions?api-version=xxx"
@@ -202,7 +231,7 @@ export function ConfigDialog({
           </Button>
           <Button 
             onClick={handleSave} 
-            disabled={isSaving || !azureEndpoint || !azureApiKey || !azureModel}
+            disabled={isSaving || !backendUrl || !azureEndpoint || !azureApiKey || !azureModel}
           >
             {isSaving ? (
               <>
