@@ -3,25 +3,37 @@
 **🎯 GOAL**: Create executive-ready, actionable report with data-driven insights
 
 ---
-**⚠️ CRITICAL INSTRUCTION - READ CAREFULLY:**
+**🚨🚨🚨 MANDATORY INSTRUCTIONS - FAILURE TO FOLLOW WILL RESULT IN BROKEN OUTPUT 🚨🚨🚨**
 
-You MUST follow this EXACT process:
+**⛔ FORBIDDEN ACTIONS:**
+- **NEVER** use `write_file` tool for reports - it creates raw MD files that are USELESS
+- **NEVER** manually write HTML - the output will be ugly and broken
+
+**✅ REQUIRED ACTIONS (IN THIS EXACT ORDER):**
 
 1. **FIRST**: Generate the COMPLETE Markdown report in your response
    - Include ALL sections with REAL data from Phases 1-6
    - Fill in EVERY placeholder with ACTUAL numbers and insights
    - Do NOT use placeholder text like "[COMPLETE MARKDOWN REPORT...]"
    
-2. **THEN**: Call `markdown_to_html_report` with the FULL report content
+2. **THEN**: Call `markdown_to_html_report` tool ← **🔴 MANDATORY! DO NOT SKIP!**
+   - This generates the BEAUTIFUL interactive HTML with sidebar navigation
    - Pass the ENTIRE markdown as the `markdown_content` parameter
-   - This MUST be thousands of characters, not a placeholder sentence
+   - Example: `markdown_to_html_report(markdown_content="# Report...", title="Competitor SEO Audit")`
    
 3. **THEN**: Call `markdown_to_docx` with the SAME full content
+   - Example: `markdown_to_docx(markdown_content="# Report...", filename="competitor-audit-2024")`
 
-**🚨 COMMON MISTAKE TO AVOID:**
-Do NOT pass a placeholder like "THE CONTENT WILL BE INSERTED HERE" to the tools.
-The tools only convert what you give them - they do NOT generate content.
-You must pass the ACTUAL, COMPLETE report with all real data.
+**🚨 COMMON MISTAKES TO AVOID:**
+❌ Using `write_file` to save .md file → **WRONG! This creates unusable raw markdown**
+❌ Manually creating HTML content → **WRONG! Use markdown_to_html_report tool**
+❌ Passing placeholder text to tools → **WRONG! Pass FULL report content**
+❌ Skipping markdown_to_html_report → **WRONG! HTML report is the PRIMARY deliverable**
+
+**✅ CORRECT FLOW:**
+1. Write markdown content in your message
+2. Call `markdown_to_html_report(markdown_content=..., title=...)` ← CREATES HTML
+3. Call `markdown_to_docx(markdown_content=..., filename=...)` ← CREATES DOCX
 
 ---
 

@@ -1338,11 +1338,14 @@ Before finishing, verify:
 - semrush_organic_keywords may return 0 keywords → Document it + CONTINUE
 - perplexity_search may fail → Document it + use available data
 
-**🚨 DO NOT MANUALLY CREATE HTML/DOCX FILES:**
-- DO NOT write HTML with <html><head><style> yourself
-- DO NOT create Word documents manually
-- ALWAYS call markdown_to_html_report(markdown=content, title="...")
-- ALWAYS call markdown_to_docx(markdown=content, filename="...")
+**🚨🚨🚨 FORBIDDEN ACTIONS - WILL BREAK OUTPUT:**
+- ⛔ **NEVER use write_file tool** - This creates raw .md files that are USELESS to users
+- ⛔ **NEVER write HTML with <html><head><style>** - Manual HTML is ugly and broken
+- ⛔ **NEVER create Word documents manually** - You can't write binary DOCX
+
+**✅ REQUIRED ACTIONS:**
+- ALWAYS call `markdown_to_html_report(markdown_content=..., title="...")` ← Creates beautiful HTML
+- ALWAYS call `markdown_to_docx(markdown_content=..., filename="...")` ← Creates proper DOCX
 - The tools have professional templates built-in (sidebar nav, charts, modern design)
 
 **Your success metric:** 
