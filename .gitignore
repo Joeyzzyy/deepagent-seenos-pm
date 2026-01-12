@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/venv/
+backend/__pycache__/
+**/__pycache__/
+*.pyc
+
+# Environment
+.env
+.env.local
+.env*.local
+frontend/.env.local
+backend/.env
+
+# Build outputs
+frontend/.next/
+frontend/out/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Reports (generated files)
+*.html
+!frontend/src/**/*.html
+backend/reports/*.html
+backend/reports/*.docx
+
+# Temp files
+.langgraph/
+.langgraph_api
+

@@ -1,0 +1,111 @@
+**Critical Rules:**
+
+1. **Execution is MANDATORY - NO SKIPPING**
+   - ALL 7 Phases MUST be executed in order
+   - IF an API returns empty data or error: DOCUMENT IT and CONTINUE
+   - DO NOT skip phases due to empty data
+   - DO NOT stop execution if one tool fails
+   - Example: IF semrush_domain_history fails → Write "Data unavailable due to API error" → CONTINUE to Phase 3
+
+2. **Error Handling Protocol**
+   - IF API returns HTTP error: Log error message, set data to "API Error", CONTINUE
+   - IF API returns 0 results: Set data to "No data available", CONTINUE
+   - IF API times out: Set data to "Request timeout", CONTINUE
+   - NEVER say "Analysis stopped due to errors" - ALWAYS complete all phases
+   - At end of report, include "Data Limitations" section explaining what failed
+
+3. **Comparative Analysis is MANDATORY**
+   - Execute Phase 3 tools (pages, keywords, backlinks) for BOTH competitors AND my_domain
+   - Generate comparison tables showing side-by-side metrics
+   - IF data missing for one domain, show "Data unavailable" but include other domains
+   - Highlight gaps and opportunities based on available data
+
+4. **Data Quality Standards**
+   - ALL data must be labeled with market (e.g., "Monthly Traffic (US Market)")
+   - Use inline citations [Source](url), NOT footnotes
+   - NO emojis or Unicode symbols in report (ASCII only)
+   - Include API URLs in methodology notes
+   - IF data is partial/incomplete, add note: "(Partial data - see limitations)"
+
+5. **Investigation Protocol**
+   - IF requires_investigation === true, Phase 6 is MANDATORY
+   - IF no fluctuations detected, document: "No significant fluctuations (>15% MoM) detected"
+   - Complete ALL search rounds before concluding root cause
+   - Provide confidence level (High/Medium/Low) for each root cause
+   - Include evidence URLs from perplexity_search citations
+
+6. **Report Completeness - NON-NEGOTIABLE**
+   - Generate ALL 3 formats: Markdown + HTML + DOCX (even if data is partial)
+   - Include all 5 core sections (use "Data unavailable" if needed)
+   - Minimum viable report structure:
+     * Section 1: Overview table (even with partial data)
+     * Section 2: History table OR error explanation
+     * Section 3: Content analysis OR "No data available"
+     * Section 4: Fluctuation analysis OR "No fluctuations detected"
+     * Section 5: Recommendations based on available data
+   - Add "Data Limitations" section at end explaining what APIs failed
+   
+   **CRITICAL - HTML Generation:**
+   - You MUST call markdown_to_html_report TOOL (do NOT write HTML yourself)
+   - You MUST call markdown_to_docx TOOL (do NOT write DOCX yourself)
+   - The tools will automatically add:
+     * Sidebar navigation
+     * Modern styling (Blue-Teal-Purple theme)
+     * Chart.js visualizations
+     * Responsive design
+   - DO NOT create simple HTML with basic CSS - USE THE TOOLS
+
+7. **Cost Control**
+   - Use display_limit parameters wisely
+   - Batch operations when possible
+   - Only invoke Phase 6 if fluctuations detected
+
+---
+
+**🚨 FINAL REMINDER - READ THIS BEFORE STARTING:**
+
+1. **NEVER STOP EXECUTION** - API errors are EXPECTED, not reasons to quit
+2. **DOCUMENT, DON'T SKIP** - If data is missing, write "Data unavailable" and CONTINUE
+3. **ALL 7 PHASES REQUIRED** - Even with errors, execute every phase
+4. **COMPLETE REPORT MANDATORY** - Generate Markdown + HTML + DOCX no matter what
+5. **PARTIAL DATA IS ACCEPTABLE** - A report with "No data available" is better than no report
+6. **USE TOOLS, DON'T CREATE FILES YOURSELF** - Call markdown_to_html_report and markdown_to_docx tools
+
+**Common API failures you WILL encounter:**
+- semrush_domain_history may return 0 data → Document it + CONTINUE
+- semrush_domain_organic_pages may return 0 pages → Document it + CONTINUE  
+- semrush_organic_keywords may return 0 keywords → Document it + CONTINUE
+- perplexity_search may fail → Document it + use available data
+
+**🚨 DO NOT MANUALLY CREATE HTML/DOCX FILES:**
+- DO NOT write HTML with <html><head><style> yourself
+- DO NOT create Word documents manually
+- ALWAYS call markdown_to_html_report(markdown=content, title="...")
+- ALWAYS call markdown_to_docx(markdown=content, filename="...")
+- The tools have professional templates built-in (sidebar nav, charts, modern design)
+
+**Your success metric:** 
+1. Did you generate complete 5-section Markdown report? YES/NO
+2. Did you CALL markdown_to_html_report tool? YES/NO
+3. Did you CALL markdown_to_docx tool? YES/NO
+4. Did you CALL todo_write to mark Phase 7 as completed? YES/NO
+
+**🔴 CRITICAL - BEFORE FINISHING:**
+After calling markdown_to_html_report and markdown_to_docx tools, you MUST call todo_write with:
+
+Example JSON format:
+{
+  "merge": true,
+  "todos": [
+    {
+      "id": "<phase_7_todo_id>",
+      "status": "completed"
+    }
+  ]
+}
+
+**DO NOT FORGET THIS STEP** - Users need to see all tasks marked as completed!
+
+---
+
+Starting analysis...

@@ -1,0 +1,8 @@
+**Phase 4: Competitive Gap Analysis (if my_domain provided)**
+IF my_domain is provided:
+  FOR EACH competitor in [competitors]:
+    - semrush_keyword_gap(target_domain=my_domain, competitor_domain=competitor, database={{primary_market}}, limit=20)
+    → Find keywords each competitor ranks for but my_domain does not
+    → IF returns "No gaps found": Document it and CONTINUE to next competitor
+ELSE:
+  → Skip this phase and document "Gap analysis skipped - no my_domain provided"

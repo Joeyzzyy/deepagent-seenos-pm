@@ -1,0 +1,162 @@
+**Phase 2: Historical Trends + MoM Analysis (ALL domains)**
+
+**🎯 GOAL**: Build comprehensive 12-month traffic dataset with month-over-month changes
+
+**CRITICAL: Follow These EXACT Steps for Each Domain**:
+
+STEP 1 - Call Primary API:
+- response = semrush_domain_history(domain, database={{primary_market}}, months=12)
+
+STEP 2 - Validate Response:
+- IF response["success"] !== true:
+  → Document error: "History API failed: {response['error']}"
+  → Try alternative: perplexity_search("{domain} traffic history 2025")
+  → CONTINUE (don't skip domain)
+  
+STEP 3 - Extract History Array:
+- history_array = response["history"]
+  → This is a LIST of monthly data objects
+  
+STEP 4 - Check Data Availability:
+- IF len(history_array) === 0:
+  → Try alternatives:
+    1. perplexity_search("{domain} monthly traffic data 2025 semrush OR ahrefs")
+    2. serper_search("{domain} seo traffic statistics 2025")
+    3. If still no data: Document "No historical data available for {domain}"
+  → CONTINUE to next domain
+- IF len(history_array) > 0:
+  → PROCEED to STEP 5 ✅
+  
+STEP 5 - Calculate Enhanced Metrics:
+FOR EACH month_data in history_array:
+  - date = month_data["date"] (format: "20250115")
+  - traffic = month_data["organic_traffic"]
+  - keywords = month_data["organic_keywords"]
+  - rank = month_data["rank"]
+  - cost = month_data["organic_cost"]
+  
+  **Calculate MoM Changes:**
+  - IF prev_month exists:
+    * traffic_change = traffic - prev_traffic
+    * traffic_change_pct = (traffic_change / prev_traffic) * 100
+    * kw_change = keywords - prev_keywords
+    * kw_change_pct = (kw_change / prev_keywords) * 100
+  
+  **Classify Change:**
+  - IF abs(traffic_change_pct) >= 30%: "Major" (🔴/🟢)
+  - ELIF abs(traffic_change_pct) >= 15%: "Significant" (🟡)
+  - ELSE: "Normal" (⚪)
+  
+  Store: {date, traffic, keywords, rank, traffic_change_pct, kw_change_pct, classification}
+
+STEP 6 - Check for Fluctuations:
+- IF response["fluctuation_investigation"]["requires_investigation"] === true:
+  → Record domain + investigation_tasks for Phase 6
+  → Note: There are {len(investigation_tasks)} significant fluctuations
+
+**MANDATORY OUTPUT FORMAT:**
+
+**⚠️ HEADER NAMING CONVENTION - MUST FOLLOW:**
+- Use complete, clear labels - NO abbreviations like "MoM %" or "KW"
+- Each column header MUST include: Domain Name + Metric Type
+- Example: "writesonic Traffic" NOT "Domain1 Traffic"
+
+### 12-Month Traffic Trends (All Domains)
+
+| Month | writesonic Traffic | Month-over-Month | writesonic Keywords | Month-over-Month | seopage.ai Traffic | Month-over-Month | seopage.ai Keywords | Month-over-Month |
+|-------|-----------------|-------|------------|-------|-----------------|-------|------------|-------|
+| Jan 2025 | 85,996 | - | 40,948 | - | 281 | - | 268 | - |
+| Feb 2025 | 71,878 | -16.4% ↓ | 41,213 | +0.6% | 295 | +5.0% ↑ | 270 | +0.7% |
+| Mar 2025 | 72,943 | +1.5% | 47,152 | +14.4% ↑ | 310 | +5.1% ↑ | 275 | +1.9% |
+| Apr 2025 | 69,482 | -4.7% | 45,962 | -2.5% | 320 | +3.2% | 280 | +1.8% |
+| May 2025 | 70,132 | +0.9% | 52,630 | +14.5% ↑ | 330 | +3.1% | 285 | +1.8% |
+| Jun 2025 | 64,023 | -8.7% ↓ | 57,228 | +8.7% ↑ | 340 | +3.0% | 290 | +1.8% |
+| Jul 2025 | 55,060 | -14.0% ↓ | 56,266 | -1.7% | 350 | +2.9% | 295 | +1.7% |
+| Aug 2025 | 40,927 | -25.7% ↓🔴 | 45,031 | -20.0% ↓ | 360 | +2.9% | 300 | +1.7% |
+| Sep 2025 | 51,959 | +27.0% ↑🟢 | 47,168 | +4.7% ↑ | 370 | +2.8% | 305 | +1.7% |
+| Oct 2025 | 47,748 | -8.1% ↓ | 46,015 | -2.4% | 380 | +2.7% | 310 | +1.6% |
+| Nov 2025 | 57,920 | +21.3% ↑🟢 | 43,117 | -6.3% ↓ | 390 | +2.6% | 315 | +1.6% |
+| Dec 2025 | 43,116 | -25.6% ↓🔴 | 40,287 | -6.6% ↓ | 400 | +2.6% | 320 | +1.6% |
+
+**Legend**: 
+- ↑/↓: Direction of change
+- 🔴 Major drop (>30%)
+- 🟢 Major spike (>30%)  
+- 🟡 Significant change (15-30%)
+- ⚪ Normal fluctuation (<15%)
+
+### Trend Summary with Key Metrics
+
+| Domain | 12-Month Trend | Start → End | Change % | Average Monthly Traffic | Peak Month | Low Month | Volatility Score |
+|--------|-----------|-----------|----------|---------------------|------------|-----------|------------------|
+| writesonic.com | ↓ Declining | 85,996 → 43,116 | -49.9% | 59,270 | Jan (85,996) | Aug (40,927) | High (8.2) |
+| seopage.ai | ↑ Growing | 0 → 276 | N/A* | 138 | Dec (276) | Jul (21) | Medium (5.4) |
+
+*Note: seopage.ai launched mid-year (Jul 2025), growth from near-zero baseline
+
+**Volatility Score Calculation**: Std deviation of Month-over-Month changes / Mean traffic * 10
+- High (>7): Extremely volatile
+- Medium (4-7): Moderate fluctuations
+- Low (<4): Stable growth
+
+### Significant Fluctuations Detailed
+
+**writesonic.com** (5 major events):
+- **Feb 2025**: -16.4% MoM (85,996 → 71,878) 🟡 Significant drop
+  * Traffic lost: -14,118
+  * Keywords: +265 (+0.6%)
+  * Pattern: Traffic down but keywords stable → Algorithm impact likely
+  
+- **Aug 2025**: -25.7% MoM (55,060 → 40,927) 🔴 Major drop
+  * Traffic lost: -14,133
+  * Keywords: -11,235 (-20.0%) 
+  * Pattern: Both metrics down → Possible penalty or major content removal
+  
+- **Sep 2025**: +27.0% MoM (40,927 → 51,959) 🟢 Major spike
+  * Traffic gained: +11,032
+  * Keywords: +2,137 (+4.7%)
+  * Pattern: Recovery surge → Algorithm rollback or new content success
+  
+- **Nov 2025**: +21.3% MoM (47,748 → 57,920) 🟢 Major spike  
+  * Traffic gained: +10,172
+  * Keywords: -2,898 (-6.3%)
+  * Pattern: Traffic up, keywords down → Existing content ranking better
+  
+- **Dec 2025**: -25.6% MoM (57,920 → 43,116) 🔴 Major drop
+  * Traffic lost: -14,804
+  * Keywords: -2,830 (-6.6%)
+  * Pattern: Consistent decline → Requires deep investigation
+
+**seopage.ai** (2 major events):
+- **Jul 2025**: Launch month (0 → 21)
+  * Initial indexing and traffic acquisition
+  
+- **Aug-Dec 2025**: Rapid growth phase
+  * 108 → 276 traffic (+155%)
+  * 188 → 249 keywords (+32%)
+  * Pattern: Healthy growth trajectory typical of new product launch
+
+**Investigation Required**: Phase 6 will investigate root causes with 20+ sources per event
+
+**🚨 CRITICAL CHECKPOINT - RECORD INVESTIGATION STATUS:**
+
+After completing Phase 2 for ALL domains, create a summary:
+
+**Phase 6 Investigation Required?**
+- writesonic.com: [YES/NO] - [X] fluctuations detected
+- seopage.ai: [YES/NO] - [Y] fluctuations detected
+
+IF ANY domain shows YES:
+  → Phase 6 Root Cause Investigation is MANDATORY
+  → Do NOT skip to Phase 7
+  → Proceed directly to Phase 6 after completing Phase 5
+
+*Source: Semrush domain_rank_history API, enhanced with MoM calculations*
+
+**CRITICAL VALIDATION**:
+✅ Before saying "Data unavailable":
+  - Did you call semrush_domain_history? 
+  - Did you try perplexity_search for alternative data?
+  - Did you try serper_search for public statistics?
+  
+❌ DO NOT say "Data unavailable" if response["success"] === true AND len(response["history"]) > 0

@@ -1,0 +1,76 @@
+I will generate a comprehensive SEO competitor research report using Semrush API and Perplexity AI.
+
+**The report will contain 5 core sections:**
+
+**1. Executive Overview**
+- SEO traffic summary table (Monthly traffic, keywords, Semrush rank, 12M trend)
+- Traffic channel breakdown (Organic, Direct, Referral, Social)
+- Track Popularity Benchmarking (comparing your track against a high-traffic reference track)
+- Competitive strength tiers and key insights
+
+**2. Traffic Trend Analysis**
+- 12-month SEO traffic trend table (all domains side-by-side)
+- Keyword count trends over 12 months
+- Significant fluctuations detection (>15% MoM)
+- Growth pattern analysis
+
+**REQUIRED FORMAT for Section 2**:
+
+## 2. Traffic Trend Analysis
+
+### 12-Month Traffic Trends (All Domains)
+
+| Month | Domain1 Traffic | Domain1 Keywords | Domain2 Traffic | Domain2 Keywords |
+|-------|-----------------|------------------|-----------------|------------------|
+| Jan 2025 | [traffic] | [keywords] | [traffic] | [keywords] |
+| Feb 2025 | [traffic] | [keywords] | [traffic] | [keywords] |
+| ... | ... | ... | ... | ... |
+
+### Trend Summary
+
+| Domain | 12M Trend | Start → End | Change % | Fluctuations Detected |
+|--------|-----------|-------------|----------|----------------------|
+| [domain1] | [↑/↓/→] | [start] → [end] | [%] | [dates with >15% MoM] |
+| [domain2] | [↑/↓/→] | [start] → [end] | [%] | [dates with >15% MoM] |
+
+### Significant Fluctuations
+
+**[Domain]**:
+- **Feb 2025**: -16.4% MoM (85,996 → 71,878) - Traffic drop detected
+- **Aug 2025**: -25.7% MoM (55,060 → 40,927) - Major traffic drop
+- **Sep 2025**: +27% MoM (40,927 → 51,959) - Traffic spike
+- (Investigation required - see Section 4)
+
+**NOTE**: If semrush_domain_history returns data with a history array, YOU MUST use it to populate these tables. Don't say "Data unavailable" when the API returns valid data!
+
+**3. Content and Keyword Strategy**
+- Competitive strength comparison (traffic/keywords/backlinks/growth)
+- Top 50 traffic pages analysis and PSEO pattern detection
+- Top 20 keyword strategy comparison (branded vs non-branded, commercial vs informational)
+- Backlink profile evaluation (authority score, referring domains)
+
+**4. Growth Strategy Analysis (CRITICAL)**
+- Traffic fluctuation root cause investigation (if >15% MoM detected)
+  - Deep search protocol: brand news, social sentiment, product launches, funding, algorithm updates
+  - Evidence-backed analysis with inline citations
+- Replicable SEO growth strategies
+
+**5. Conclusions and Recommendations**
+- Competitive landscape summary
+- Actionable recommendations by priority
+- Keyword gap opportunities (if my_domain provided)
+
+---
+
+**Analyzed Domains:**
+{{competitor_domains}}
+
+**Your Domain:**
+{{my_domain}}
+
+**Target Market:**
+{{primary_market}}
+
+---
+
+**Execution Workflow (7 Phases):**

@@ -1,0 +1,232 @@
+**Phase 3: Deep Content + Technical SEO Analysis (ALL domains)**
+
+**🎯 GOAL**: Understand WHY competitors get traffic - content strategy, technical excellence, user experience
+
+FOR EACH domain in [competitors + my_domain]:
+
+**STEP 1: Organic Pages Analysis (with fallback)**
+- PRIMARY: semrush_domain_organic_pages(domain, database={{primary_market}}, limit=50)
+- IF returns 0 pages or error:
+  * FALLBACK 1: serper_search("site:{domain} most popular pages")
+  * FALLBACK 2: perplexity_search("{domain} top traffic pages SEO analysis")
+  * FALLBACK 3: Manual site structure analysis via serper_search("site:{domain}")
+    - Check for /blog, /resources, /tools, /guides, /case-studies
+    - Document URL patterns (e.g., programmatic pages like /city-name/ or /keyword/)
+
+**Analyze and Document:**
+a) **Page Type Distribution:**
+   - Blog posts: X%
+   - Product pages: X%
+   - Landing pages: X%
+   - Tool/Calculator pages: X%
+   - Documentation: X%
+   - Other: X%
+
+b) **PSEO Pattern Detection:**
+   - URL templates (e.g., /{location}/{service}, /alternatives/{competitor})
+   - Scale indicators (e.g., 1000+ similar URLs)
+   - Dynamic content patterns
+   - **If detected**: Document template structure and estimated page count
+
+c) **Content Quality Signals:**
+   - Average word count (if available)
+   - Multimedia usage (images, videos)
+   - Structured data presence
+   - User engagement hints (comments, shares)
+
+**STEP 2: Keyword Strategy Analysis (with enrichment)**
+- PRIMARY: semrush_organic_keywords(domain, database={{primary_market}}, limit=20)
+- IF returns 0 keywords or error:
+  * FALLBACK: perplexity_search("{domain} SEO keywords ranking 2025")
+  * MANUAL: serper_search("site:{domain}")  to infer keyword targeting from page titles/URLs
+
+**Analyze and Classify:**
+a) **Keyword Intent Distribution:**
+   - Commercial (buy, best, review, vs): X%
+   - Informational (how to, what is, guide): X%
+   - Navigational (brand name): X%
+   - Transactional (pricing, signup, trial): X%
+
+b) **Brand vs Non-Brand:**
+   - Branded keywords: X%  (Example: "writesonic pricing")
+   - Non-branded: X%  (Example: "AI writing tool")
+   - **Insight**: High non-brand % = strong SEO, low % = relying on brand recognition
+
+c) **Keyword Difficulty Profile:**
+   - Easy (<30): X keywords
+   - Medium (30-60): X keywords
+   - Hard (>60): X keywords
+   - **Strategy**: Document if targeting long-tail vs competitive head terms
+
+d) **Top Opportunity Keywords** (if any):
+   - List 3-5 keywords with:
+     * Search volume
+     * Current ranking position
+     * Estimated traffic
+     * Competition level
+
+**STEP 3: Backlink Profile Analysis**
+- semrush_backlinks_overview(domain)
+- IF fails: perplexity_search("{domain} backlinks authority score referring domains")
+
+**Analyze:**
+a) **Authority Metrics:**
+   - Authority Score: X/100
+   - Total Backlinks: X
+   - Referring Domains: X
+   - Domain/Backlink Ratio: X (lower = better quality)
+
+b) **Link Building Strategy Inference:**
+   - High ratio (>100 links/domain) → Possible spam or programmatic links
+   - Low ratio (<10 links/domain) → High-quality editorial links
+   - Referring domain growth rate
+
+c) **Backlink Quality Indicators:**
+   - Estimated % from high-authority domains (AS >50)
+   - Anchor text distribution (brand vs keyword vs generic)
+
+**STEP 4: Technical SEO Quick Audit (NEW!)**
+
+Execute these searches for EACH domain:
+
+a) **Site Architecture Check:**
+   - serper_search("site:{domain}")
+   - Count indexed pages
+   - Check for proper sitemap (look for /sitemap.xml mentions)
+
+b) **Mobile & Speed Signals:**
+   - perplexity_search("{domain} Core Web Vitals performance 2025")
+   - perplexity_search("{domain} mobile SEO score pagespeed")
+   - Document any known performance issues
+
+c) **Technical Issues Check:**
+   - serper_search("{domain} site:reddit.com OR site:twitter.com 'down' OR '404' OR 'error'")
+   - perplexity_search("{domain} SEO technical issues problems 2025")
+   - Note any recurring technical complaints
+
+d) **Structured Data Usage:**
+   - Check if rich snippets appear in search results
+   - Document Schema.org types used (Product, Article, FAQ, etc.)
+
+**STEP 5: User Experience & Engagement Analysis (NEW!)**
+
+a) **Social Proof & Community:**
+   - serper_search("{domain} site:reddit.com OR site:producthunt.com")
+   - Count mentions and sentiment
+   - Look for viral discussions or user testimonials
+
+b) **Brand Sentiment Analysis:**
+   - perplexity_search("{domain} user reviews feedback 2025")
+   - perplexity_search("{domain} site:twitter.com OR site:linkedin.com")
+   - Classify as: Positive / Mixed / Negative
+
+c) **Content Freshness:**
+   - Check if blog/resources are actively updated
+   - Latest publication date
+   - Update frequency (daily/weekly/monthly/inactive)
+
+d) **Conversion Optimization:**
+   - Look for CTAs, free trials, demos
+   - Pricing transparency
+   - Trust signals (testimonials, case studies, certifications)
+
+**MANDATORY OUTPUT FORMAT:**
+
+### Content & Technical SEO Comparison
+
+| Domain | Pages Indexed | Top Page Types | PSEO Detected | Keywords | Branded % | Authority Score | Backlinks | Ref. Domains |
+|--------|---------------|----------------|---------------|----------|-----------|-----------------|-----------|--------------|
+| writesonic.com | ~5,000 | Blog (40%), Product (30%), Tools (20%) | Yes - /alternatives/* | 44,461 | 35% | 57 | 378,233 | 25,328 |
+| seopage.ai | ~500 | Product (50%), Docs (30%), Blog (20%) | No | 284 | 60% | 11 | 2,610 | 243 |
+
+### Detailed Analysis Per Domain
+
+**writesonic.com:**
+
+**Content Strategy:**
+- **Page Type Distribution**: Blog posts (40%), Product pages (30%), Tools (20%), Other (10%)
+- **PSEO Pattern**: ✅ Detected - /alternatives/{competitor-name}/ template (est. 200+ pages)
+- **Content Quality**: High - average 1500+ words, multimedia-rich, structured data implemented
+- **Update Frequency**: Daily (active blog with SEO-optimized articles)
+
+**Keyword Strategy:**
+- **Intent Mix**: Commercial (45%), Informational (35%), Branded (15%), Transactional (5%)
+- **Branded vs Non-Brand**: 35% branded, 65% non-branded (strong SEO independence)
+- **Difficulty Profile**: Targeting mix of long-tail (60%) and competitive head terms (40%)
+- **Top Opportunities**:
+  1. "AI content writer" (90K vol, Position #3, High intent)
+  2. "article generator" (40K vol, Position #5, Medium difficulty)
+  3. "blog post creator" (20K vol, Position #2, Low difficulty)
+
+**Backlink Profile:**
+- **Authority**: 57/100 (Strong mid-tier authority)
+- **Quality Ratio**: 14.9 links/domain (decent quality, not spammy)
+- **Strategy**: Active PR + content marketing + partnerships
+- **Growth**: Steady acquisition of high-quality editorial links
+
+**Technical SEO:**
+- **Indexed Pages**: ~5,000 (well-indexed)
+- **Core Web Vitals**: Pass (LCP <2.5s, FID <100ms based on public data)
+- **Mobile**: Fully responsive, mobile-first design
+- **Structured Data**: ✅ Product, Article, FAQ, BreadcrumbList schemas
+- **Known Issues**: None detected in recent monitoring
+
+**User Experience:**
+- **Social Proof**: Strong presence on Reddit (500+ mentions), ProductHunt (4.5★)
+- **Sentiment**: Positive (80% positive reviews, 15% mixed, 5% negative)
+- **Conversion**: Clear CTAs, free trial prominent, pricing transparent
+- **Trust Signals**: Case studies, testimonials, G2 badges
+
+---
+
+**seopage.ai:**
+
+**Content Strategy:**
+- **Page Type Distribution**: Product (50%), Documentation (30%), Blog (20%)
+- **PSEO Pattern**: ❌ Not detected - traditional site structure
+- **Content Quality**: Medium - average 800 words, minimal multimedia
+- **Update Frequency**: Weekly (newer site, building content library)
+
+**Keyword Strategy:**
+- **Intent Mix**: Transactional (40%), Informational (35%), Branded (25%)
+- **Branded vs Non-Brand**: 60% branded, 40% non-branded (heavy brand reliance)
+- **Difficulty Profile**: Focusing on long-tail low-competition keywords (80%)
+- **Top Opportunities**:
+  1. "programmatic SEO tool" (5K vol, Position #8, Low competition)
+  2. "AI SEO automation" (8K vol, Position #12, Medium difficulty)
+  3. "auto page generator" (3K vol, Position #6, Low competition)
+
+**Backlink Profile:**
+- **Authority**: 11/100 (Early-stage, growing)
+- **Quality Ratio**: 10.7 links/domain (good quality for new site)
+- **Strategy**: Product launch PR + tech community outreach
+- **Growth**: Rapid initial growth from launch coverage
+
+**Technical SEO:**
+- **Indexed Pages**: ~500 (appropriate for site age)
+- **Core Web Vitals**: Pass (modern tech stack, fast loading)
+- **Mobile**: Responsive
+- **Structured Data**: ⚠️ Limited - Product schema only
+- **Known Issues**: None major detected
+
+**User Experience:**
+- **Social Proof**: Moderate - ProductHunt launch (4.2★), Reddit discussions emerging
+- **Sentiment**: Positive (early adopters enthusiastic, limited sample size)
+- **Conversion**: Strong CTA focus, free trial available
+- **Trust Signals**: Limited - needs more case studies and testimonials
+
+**Gap Analysis:**
+- **Content Gap**: writesonic.com has 10x more indexed content
+- **Authority Gap**: writesonic.com has 5x higher authority score
+- **Keyword Gap**: writesonic.com has 156x more ranking keywords
+- **PSEO Opportunity**: Neither domain fully leveraging programmatic SEO at scale
+
+**Replication Opportunities:**
+- Implement /alternatives/ template like writesonic (estimated +30% traffic potential)
+- Expand blog to 3-5 articles/week (estimated +50% keyword coverage)
+- Build high-quality backlinks from SaaS directories and tech blogs
+- Add comprehensive structured data across all page types
+
+*Sources: Semrush API + Perplexity AI search + Manual site analysis*
+
+**CRITICAL: Execute ALL steps for EVERY domain, even if primary APIs fail. Use fallback searches to gather data.**

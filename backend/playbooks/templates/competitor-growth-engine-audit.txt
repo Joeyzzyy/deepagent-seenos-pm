@@ -1,0 +1,1373 @@
+I will generate a comprehensive SEO competitor research report using Semrush API and Perplexity AI.
+
+**The report will contain 5 core sections:**
+
+**1. Executive Overview**
+- SEO traffic summary table (Monthly traffic, keywords, Semrush rank, 12M trend)
+- Traffic channel breakdown (Organic, Direct, Referral, Social)
+- Track Popularity Benchmarking (comparing your track against a high-traffic reference track)
+- Competitive strength tiers and key insights
+
+**2. Traffic Trend Analysis**
+- 12-month SEO traffic trend table (all domains side-by-side)
+- Keyword count trends over 12 months
+- Significant fluctuations detection (>15% MoM)
+- Growth pattern analysis
+
+**REQUIRED FORMAT for Section 2**:
+
+## 2. Traffic Trend Analysis
+
+### 12-Month Traffic Trends (All Domains)
+
+| Month | Domain1 Traffic | Domain1 Keywords | Domain2 Traffic | Domain2 Keywords |
+|-------|-----------------|------------------|-----------------|------------------|
+| Jan 2025 | [traffic] | [keywords] | [traffic] | [keywords] |
+| Feb 2025 | [traffic] | [keywords] | [traffic] | [keywords] |
+| ... | ... | ... | ... | ... |
+
+### Trend Summary
+
+| Domain | 12M Trend | Start → End | Change % | Fluctuations Detected |
+|--------|-----------|-------------|----------|----------------------|
+| [domain1] | [↑/↓/→] | [start] → [end] | [%] | [dates with >15% MoM] |
+| [domain2] | [↑/↓/→] | [start] → [end] | [%] | [dates with >15% MoM] |
+
+### Significant Fluctuations
+
+**[Domain]**:
+- **Feb 2025**: -16.4% MoM (85,996 → 71,878) - Traffic drop detected
+- **Aug 2025**: -25.7% MoM (55,060 → 40,927) - Major traffic drop
+- **Sep 2025**: +27% MoM (40,927 → 51,959) - Traffic spike
+- (Investigation required - see Section 4)
+
+**NOTE**: If semrush_domain_history returns data with a history array, YOU MUST use it to populate these tables. Don't say "Data unavailable" when the API returns valid data!
+
+**3. Content and Keyword Strategy**
+- Competitive strength comparison (traffic/keywords/backlinks/growth)
+- Top 50 traffic pages analysis and PSEO pattern detection
+- Top 20 keyword strategy comparison (branded vs non-branded, commercial vs informational)
+- Backlink profile evaluation (authority score, referring domains)
+
+**4. Growth Strategy Analysis (CRITICAL)**
+- Traffic fluctuation root cause investigation (if >15% MoM detected)
+  - Deep search protocol: brand news, social sentiment, product launches, funding, algorithm updates
+  - Evidence-backed analysis with inline citations
+- Replicable SEO growth strategies
+
+**5. Conclusions and Recommendations**
+- Competitive landscape summary
+- Actionable recommendations by priority
+- Keyword gap opportunities (if my_domain provided)
+
+---
+
+**Analyzed Domains:**
+{{competitor_domains}}
+
+**Your Domain:**
+{{my_domain}}
+
+**Target Market:**
+{{primary_market}}
+
+---
+
+**Execution Workflow (7 Phases):**
+
+**Phase 1: Batch Overview**
+- semrush_domain_overview_batch(domains=[all competitors + my_domain], database={{primary_market}})
+  → Quick comparison of SEO/PPC traffic, identify Top performers
+
+**Phase 2: Historical Trends + MoM Analysis (ALL domains)**
+
+**🎯 GOAL**: Build comprehensive 12-month traffic dataset with month-over-month changes
+
+**CRITICAL: Follow These EXACT Steps for Each Domain**:
+
+STEP 1 - Call Primary API:
+- response = semrush_domain_history(domain, database={{primary_market}}, months=12)
+
+STEP 2 - Validate Response:
+- IF response["success"] !== true:
+  → Document error: "History API failed: {response['error']}"
+  → Try alternative: perplexity_search("{domain} traffic history 2025")
+  → CONTINUE (don't skip domain)
+  
+STEP 3 - Extract History Array:
+- history_array = response["history"]
+  → This is a LIST of monthly data objects
+  
+STEP 4 - Check Data Availability:
+- IF len(history_array) === 0:
+  → Try alternatives:
+    1. perplexity_search("{domain} monthly traffic data 2025 semrush OR ahrefs")
+    2. serper_search("{domain} seo traffic statistics 2025")
+    3. If still no data: Document "No historical data available for {domain}"
+  → CONTINUE to next domain
+- IF len(history_array) > 0:
+  → PROCEED to STEP 5 ✅
+  
+STEP 5 - Calculate Enhanced Metrics:
+FOR EACH month_data in history_array:
+  - date = month_data["date"] (format: "20250115")
+  - traffic = month_data["organic_traffic"]
+  - keywords = month_data["organic_keywords"]
+  - rank = month_data["rank"]
+  - cost = month_data["organic_cost"]
+  
+  **Calculate MoM Changes:**
+  - IF prev_month exists:
+    * traffic_change = traffic - prev_traffic
+    * traffic_change_pct = (traffic_change / prev_traffic) * 100
+    * kw_change = keywords - prev_keywords
+    * kw_change_pct = (kw_change / prev_keywords) * 100
+  
+  **Classify Change:**
+  - IF abs(traffic_change_pct) >= 30%: "Major" (🔴/🟢)
+  - ELIF abs(traffic_change_pct) >= 15%: "Significant" (🟡)
+  - ELSE: "Normal" (⚪)
+  
+  Store: {date, traffic, keywords, rank, traffic_change_pct, kw_change_pct, classification}
+
+STEP 6 - Check for Fluctuations:
+- IF response["fluctuation_investigation"]["requires_investigation"] === true:
+  → Record domain + investigation_tasks for Phase 6
+  → Note: There are {len(investigation_tasks)} significant fluctuations
+
+**MANDATORY OUTPUT FORMAT:**
+
+### 12-Month Traffic Trends (All Domains)
+
+| Month | Domain1 Traffic | Month-over-Month | Domain1 Keywords | Month-over-Month | Domain2 Traffic | Month-over-Month | Domain2 Keywords | Month-over-Month |
+|-------|-----------------|------------------|------------------|------------------|-----------------|------------------|------------------|------------------|
+| Jan 2025 | 85,996 | - | 40,948 | - | 281 | - | 268 | - |
+| Feb 2025 | 71,878 | -16.4% ↓ | 41,213 | +0.6% | 295 | +5.0% ↑ | 270 | +0.7% |
+| Mar 2025 | 72,943 | +1.5% | 47,152 | +14.4% ↑ | 310 | +5.1% ↑ | 275 | +1.9% |
+| Apr 2025 | 69,482 | -4.7% | 45,962 | -2.5% | 320 | +3.2% | 280 | +1.8% |
+| May 2025 | 70,132 | +0.9% | 52,630 | +14.5% ↑ | 330 | +3.1% | 285 | +1.8% |
+| Jun 2025 | 64,023 | -8.7% ↓ | 57,228 | +8.7% ↑ | 340 | +3.0% | 290 | +1.8% |
+| Jul 2025 | 55,060 | -14.0% ↓ | 56,266 | -1.7% | 350 | +2.9% | 295 | +1.7% |
+| Aug 2025 | 40,927 | -25.7% ↓🔴 | 45,031 | -20.0% ↓ | 360 | +2.9% | 300 | +1.7% |
+| Sep 2025 | 51,959 | +27.0% ↑🟢 | 47,168 | +4.7% ↑ | 370 | +2.8% | 305 | +1.7% |
+| Oct 2025 | 47,748 | -8.1% ↓ | 46,015 | -2.4% | 380 | +2.7% | 310 | +1.6% |
+| Nov 2025 | 57,920 | +21.3% ↑🟢 | 43,117 | -6.3% ↓ | 390 | +2.6% | 315 | +1.6% |
+| Dec 2025 | 43,116 | -25.6% ↓🔴 | 40,287 | -6.6% ↓ | 400 | +2.6% | 320 | +1.6% |
+
+**Legend**: 
+- ↑/↓: Direction of change
+- 🔴 Major drop (>30%)
+- 🟢 Major spike (>30%)  
+- 🟡 Significant change (15-30%)
+- ⚪ Normal fluctuation (<15%)
+
+### Trend Summary with Key Metrics
+
+| Domain | 12M Trend | Start→End | Change % | Avg Monthly Traffic | Peak Month | Low Month | Volatility Score |
+|--------|-----------|-----------|----------|---------------------|------------|-----------|------------------|
+| writesonic.com | ↓ Declining | 85,996 → 43,116 | -49.9% | 59,270 | Jan (85,996) | Aug (40,927) | High (8.2) |
+| seopage.ai | ↑ Growing | 0 → 276 | N/A* | 138 | Dec (276) | Jul (21) | Medium (5.4) |
+
+*Note: seopage.ai launched mid-year (Jul 2025), growth from near-zero baseline
+
+**Volatility Score Calculation**: Std deviation of Month-over-Month changes / Mean traffic * 10
+- High (>7): Extremely volatile
+- Medium (4-7): Moderate fluctuations
+- Low (<4): Stable growth
+
+### Significant Fluctuations Detailed
+
+**writesonic.com** (5 major events):
+- **Feb 2025**: -16.4% MoM (85,996 → 71,878) 🟡 Significant drop
+  * Traffic lost: -14,118
+  * Keywords: +265 (+0.6%)
+  * Pattern: Traffic down but keywords stable → Algorithm impact likely
+  
+- **Aug 2025**: -25.7% MoM (55,060 → 40,927) 🔴 Major drop
+  * Traffic lost: -14,133
+  * Keywords: -11,235 (-20.0%) 
+  * Pattern: Both metrics down → Possible penalty or major content removal
+  
+- **Sep 2025**: +27.0% MoM (40,927 → 51,959) 🟢 Major spike
+  * Traffic gained: +11,032
+  * Keywords: +2,137 (+4.7%)
+  * Pattern: Recovery surge → Algorithm rollback or new content success
+  
+- **Nov 2025**: +21.3% MoM (47,748 → 57,920) 🟢 Major spike  
+  * Traffic gained: +10,172
+  * Keywords: -2,898 (-6.3%)
+  * Pattern: Traffic up, keywords down → Existing content ranking better
+  
+- **Dec 2025**: -25.6% MoM (57,920 → 43,116) 🔴 Major drop
+  * Traffic lost: -14,804
+  * Keywords: -2,830 (-6.6%)
+  * Pattern: Consistent decline → Requires deep investigation
+
+**seopage.ai** (2 major events):
+- **Jul 2025**: Launch month (0 → 21)
+  * Initial indexing and traffic acquisition
+  
+- **Aug-Dec 2025**: Rapid growth phase
+  * 108 → 276 traffic (+155%)
+  * 188 → 249 keywords (+32%)
+  * Pattern: Healthy growth trajectory typical of new product launch
+
+**Investigation Required**: Phase 6 will investigate root causes with 20+ sources per event
+
+**🚨 CRITICAL CHECKPOINT - RECORD INVESTIGATION STATUS:**
+
+After completing Phase 2 for ALL domains, create a summary:
+
+**Phase 6 Investigation Required?**
+- writesonic.com: [YES/NO] - [X] fluctuations detected
+- seopage.ai: [YES/NO] - [Y] fluctuations detected
+
+IF ANY domain shows YES:
+  → Phase 6 Root Cause Investigation is MANDATORY
+  → Do NOT skip to Phase 7
+  → Proceed directly to Phase 6 after completing Phase 5
+
+*Source: Semrush domain_rank_history API, enhanced with MoM calculations*
+
+**CRITICAL VALIDATION**:
+✅ Before saying "Data unavailable":
+  - Did you call semrush_domain_history? 
+  - Did you try perplexity_search for alternative data?
+  - Did you try serper_search for public statistics?
+  
+❌ DO NOT say "Data unavailable" if response["success"] === true AND len(response["history"]) > 0
+
+**Phase 3: Deep Content + Technical SEO Analysis (ALL domains)**
+
+**🎯 GOAL**: Understand WHY competitors get traffic - content strategy, technical excellence, user experience
+
+FOR EACH domain in [competitors + my_domain]:
+
+**STEP 1: Organic Pages Analysis (with fallback)**
+- PRIMARY: semrush_domain_organic_pages(domain, database={{primary_market}}, limit=50)
+- IF returns 0 pages or error:
+  * FALLBACK 1: serper_search("site:{domain} most popular pages")
+  * FALLBACK 2: perplexity_search("{domain} top traffic pages SEO analysis")
+  * FALLBACK 3: Manual site structure analysis via serper_search("site:{domain}")
+    - Check for /blog, /resources, /tools, /guides, /case-studies
+    - Document URL patterns (e.g., programmatic pages like /city-name/ or /keyword/)
+
+**Analyze and Document:**
+a) **Page Type Distribution:**
+   - Blog posts: X%
+   - Product pages: X%
+   - Landing pages: X%
+   - Tool/Calculator pages: X%
+   - Documentation: X%
+   - Other: X%
+
+b) **PSEO Pattern Detection:**
+   - URL templates (e.g., /{location}/{service}, /alternatives/{competitor})
+   - Scale indicators (e.g., 1000+ similar URLs)
+   - Dynamic content patterns
+   - **If detected**: Document template structure and estimated page count
+
+c) **Content Quality Signals:**
+   - Average word count (if available)
+   - Multimedia usage (images, videos)
+   - Structured data presence
+   - User engagement hints (comments, shares)
+
+**STEP 2: Keyword Strategy Analysis (with enrichment)**
+- PRIMARY: semrush_organic_keywords(domain, database={{primary_market}}, limit=20)
+- IF returns 0 keywords or error:
+  * FALLBACK: perplexity_search("{domain} SEO keywords ranking 2025")
+  * MANUAL: serper_search("site:{domain}")  to infer keyword targeting from page titles/URLs
+
+**Analyze and Classify:**
+a) **Keyword Intent Distribution:**
+   - Commercial (buy, best, review, vs): X%
+   - Informational (how to, what is, guide): X%
+   - Navigational (brand name): X%
+   - Transactional (pricing, signup, trial): X%
+
+b) **Brand vs Non-Brand:**
+   - Branded keywords: X%  (Example: "writesonic pricing")
+   - Non-branded: X%  (Example: "AI writing tool")
+   - **Insight**: High non-brand % = strong SEO, low % = relying on brand recognition
+
+c) **Keyword Difficulty Profile:**
+   - Easy (<30): X keywords
+   - Medium (30-60): X keywords
+   - Hard (>60): X keywords
+   - **Strategy**: Document if targeting long-tail vs competitive head terms
+
+d) **Top Opportunity Keywords** (if any):
+   - List 3-5 keywords with:
+     * Search volume
+     * Current ranking position
+     * Estimated traffic
+     * Competition level
+
+**STEP 3: Backlink Profile Analysis**
+- semrush_backlinks_overview(domain)
+- IF fails: perplexity_search("{domain} backlinks authority score referring domains")
+
+**Analyze:**
+a) **Authority Metrics:**
+   - Authority Score: X/100
+   - Total Backlinks: X
+   - Referring Domains: X
+   - Domain/Backlink Ratio: X (lower = better quality)
+
+b) **Link Building Strategy Inference:**
+   - High ratio (>100 links/domain) → Possible spam or programmatic links
+   - Low ratio (<10 links/domain) → High-quality editorial links
+   - Referring domain growth rate
+
+c) **Backlink Quality Indicators:**
+   - Estimated % from high-authority domains (AS >50)
+   - Anchor text distribution (brand vs keyword vs generic)
+
+**STEP 4: Technical SEO Quick Audit (NEW!)**
+
+Execute these searches for EACH domain:
+
+a) **Site Architecture Check:**
+   - serper_search("site:{domain}")
+   - Count indexed pages
+   - Check for proper sitemap (look for /sitemap.xml mentions)
+
+b) **Mobile & Speed Signals:**
+   - perplexity_search("{domain} Core Web Vitals performance 2025")
+   - perplexity_search("{domain} mobile SEO score pagespeed")
+   - Document any known performance issues
+
+c) **Technical Issues Check:**
+   - serper_search("{domain} site:reddit.com OR site:twitter.com 'down' OR '404' OR 'error'")
+   - perplexity_search("{domain} SEO technical issues problems 2025")
+   - Note any recurring technical complaints
+
+d) **Structured Data Usage:**
+   - Check if rich snippets appear in search results
+   - Document Schema.org types used (Product, Article, FAQ, etc.)
+
+**STEP 5: User Experience & Engagement Analysis (NEW!)**
+
+a) **Social Proof & Community:**
+   - serper_search("{domain} site:reddit.com OR site:producthunt.com")
+   - Count mentions and sentiment
+   - Look for viral discussions or user testimonials
+
+b) **Brand Sentiment Analysis:**
+   - perplexity_search("{domain} user reviews feedback 2025")
+   - perplexity_search("{domain} site:twitter.com OR site:linkedin.com")
+   - Classify as: Positive / Mixed / Negative
+
+c) **Content Freshness:**
+   - Check if blog/resources are actively updated
+   - Latest publication date
+   - Update frequency (daily/weekly/monthly/inactive)
+
+d) **Conversion Optimization:**
+   - Look for CTAs, free trials, demos
+   - Pricing transparency
+   - Trust signals (testimonials, case studies, certifications)
+
+**MANDATORY OUTPUT FORMAT:**
+
+### Content & Technical SEO Comparison
+
+| Domain | Pages Indexed | Top Page Types | PSEO Detected | Keywords | Branded % | Authority Score | Backlinks | Ref. Domains |
+|--------|---------------|----------------|---------------|----------|-----------|-----------------|-----------|--------------|
+| writesonic.com | ~5,000 | Blog (40%), Product (30%), Tools (20%) | Yes - /alternatives/* | 44,461 | 35% | 57 | 378,233 | 25,328 |
+| seopage.ai | ~500 | Product (50%), Docs (30%), Blog (20%) | No | 284 | 60% | 11 | 2,610 | 243 |
+
+### Detailed Analysis Per Domain
+
+**writesonic.com:**
+
+**Content Strategy:**
+- **Page Type Distribution**: Blog posts (40%), Product pages (30%), Tools (20%), Other (10%)
+- **PSEO Pattern**: ✅ Detected - /alternatives/{competitor-name}/ template (est. 200+ pages)
+- **Content Quality**: High - average 1500+ words, multimedia-rich, structured data implemented
+- **Update Frequency**: Daily (active blog with SEO-optimized articles)
+
+**Keyword Strategy:**
+- **Intent Mix**: Commercial (45%), Informational (35%), Branded (15%), Transactional (5%)
+- **Branded vs Non-Brand**: 35% branded, 65% non-branded (strong SEO independence)
+- **Difficulty Profile**: Targeting mix of long-tail (60%) and competitive head terms (40%)
+- **Top Opportunities**:
+  1. "AI content writer" (90K vol, Position #3, High intent)
+  2. "article generator" (40K vol, Position #5, Medium difficulty)
+  3. "blog post creator" (20K vol, Position #2, Low difficulty)
+
+**Backlink Profile:**
+- **Authority**: 57/100 (Strong mid-tier authority)
+- **Quality Ratio**: 14.9 links/domain (decent quality, not spammy)
+- **Strategy**: Active PR + content marketing + partnerships
+- **Growth**: Steady acquisition of high-quality editorial links
+
+**Technical SEO:**
+- **Indexed Pages**: ~5,000 (well-indexed)
+- **Core Web Vitals**: Pass (LCP <2.5s, FID <100ms based on public data)
+- **Mobile**: Fully responsive, mobile-first design
+- **Structured Data**: ✅ Product, Article, FAQ, BreadcrumbList schemas
+- **Known Issues**: None detected in recent monitoring
+
+**User Experience:**
+- **Social Proof**: Strong presence on Reddit (500+ mentions), ProductHunt (4.5★)
+- **Sentiment**: Positive (80% positive reviews, 15% mixed, 5% negative)
+- **Conversion**: Clear CTAs, free trial prominent, pricing transparent
+- **Trust Signals**: Case studies, testimonials, G2 badges
+
+---
+
+**seopage.ai:**
+
+**Content Strategy:**
+- **Page Type Distribution**: Product (50%), Documentation (30%), Blog (20%)
+- **PSEO Pattern**: ❌ Not detected - traditional site structure
+- **Content Quality**: Medium - average 800 words, minimal multimedia
+- **Update Frequency**: Weekly (newer site, building content library)
+
+**Keyword Strategy:**
+- **Intent Mix**: Transactional (40%), Informational (35%), Branded (25%)
+- **Branded vs Non-Brand**: 60% branded, 40% non-branded (heavy brand reliance)
+- **Difficulty Profile**: Focusing on long-tail low-competition keywords (80%)
+- **Top Opportunities**:
+  1. "programmatic SEO tool" (5K vol, Position #8, Low competition)
+  2. "AI SEO automation" (8K vol, Position #12, Medium difficulty)
+  3. "auto page generator" (3K vol, Position #6, Low competition)
+
+**Backlink Profile:**
+- **Authority**: 11/100 (Early-stage, growing)
+- **Quality Ratio**: 10.7 links/domain (good quality for new site)
+- **Strategy**: Product launch PR + tech community outreach
+- **Growth**: Rapid initial growth from launch coverage
+
+**Technical SEO:**
+- **Indexed Pages**: ~500 (appropriate for site age)
+- **Core Web Vitals**: Pass (modern tech stack, fast loading)
+- **Mobile**: Responsive
+- **Structured Data**: ⚠️ Limited - Product schema only
+- **Known Issues**: None major detected
+
+**User Experience:**
+- **Social Proof**: Moderate - ProductHunt launch (4.2★), Reddit discussions emerging
+- **Sentiment**: Positive (early adopters enthusiastic, limited sample size)
+- **Conversion**: Strong CTA focus, free trial available
+- **Trust Signals**: Limited - needs more case studies and testimonials
+
+**Gap Analysis:**
+- **Content Gap**: writesonic.com has 10x more indexed content
+- **Authority Gap**: writesonic.com has 5x higher authority score
+- **Keyword Gap**: writesonic.com has 156x more ranking keywords
+- **PSEO Opportunity**: Neither domain fully leveraging programmatic SEO at scale
+
+**Replication Opportunities:**
+- Implement /alternatives/ template like writesonic (estimated +30% traffic potential)
+- Expand blog to 3-5 articles/week (estimated +50% keyword coverage)
+- Build high-quality backlinks from SaaS directories and tech blogs
+- Add comprehensive structured data across all page types
+
+*Sources: Semrush API + Perplexity AI search + Manual site analysis*
+
+**CRITICAL: Execute ALL steps for EVERY domain, even if primary APIs fail. Use fallback searches to gather data.**
+
+**Phase 4: Competitive Gap Analysis (if my_domain provided)**
+IF my_domain is provided:
+  FOR EACH competitor in [competitors]:
+    - semrush_keyword_gap(target_domain=my_domain, competitor_domain=competitor, database={{primary_market}}, limit=20)
+    → Find keywords each competitor ranks for but my_domain does not
+    → IF returns "No gaps found": Document it and CONTINUE to next competitor
+ELSE:
+  → Skip this phase and document "Gap analysis skipped - no my_domain provided"
+
+**Phase 5: Track Popularity Benchmarking (REQUIRED)**
+
+**Purpose**: 
+Provide strategic context by comparing the user's industry track against a trending/high-traffic reference track.
+This helps assess whether the user's track is hot/mature/niche and set realistic SEO expectations.
+
+**CRITICAL - This is NOT a "you vs them" comparison. It's a TRACK SIZE reference.**
+
+**Execution**:
+1. perplexity_search(query="most popular trending [adjacent vertical] products high traffic SEO 2024 2025 site:ahrefs.com OR site:semrush.com")
+   → Find a trending/hot category (e.g., AI Video Generation, Project Management SaaS, etc.)
+   → Look for categories with strong organic growth
+   → Prefer categories adjacent but different from user's industry
+   → IF search fails: Document "Benchmark search unavailable" + SKIP this phase
+   
+2. Select 2-3 leading products from the benchmark track
+   → Choose well-known successful products (e.g., HeyGen for AI Video)
+   
+3. semrush_domain_overview_batch(domains=[benchmark1, benchmark2, benchmark3], database={{primary_market}})
+   → Get traffic data for benchmark track
+   → IF API fails: Document "Benchmark data unavailable" + SKIP
+   
+4. Calculate track gap metrics:
+   - Benchmark Track Avg Traffic = AVG(benchmark domains traffic)
+   - Your Track Avg Traffic = AVG(analyzed domains traffic)
+   - Track Gap Multiplier = Benchmark Avg / Your Avg
+   
+**CRITICAL REPORTING RULES FOR BENCHMARK SECTION**:
+
+❌ **NEVER use these phrases**:
+- "You are behind"
+- "You lag significantly"
+- "Your domain is weaker"
+- "You need to catch up"
+
+✅ **ALWAYS use these phrases**:
+- "Your track receives [X]x less/more traffic than benchmark track"
+- "Track gap: [X]x (indicates benchmark track is [more popular/similar/less popular])"
+- "This suggests your track is [mature/growing/niche] relative to trending categories"
+- "For reference only - not a competitive comparison"
+
+**Required Report Structure**:
+
+Output the following section in your Markdown report:
+
+---
+
+## Track Popularity Benchmarking
+
+**Purpose**: Understand your industry's relative SEO potential by comparing against a high-traffic reference track. This helps set realistic expectations and assess track competitiveness.
+
+**Benchmark Track Selected**: [Track Name] (e.g., AI Video Generation)
+**Selection Reason**: Currently trending with strong organic traffic growth in 2024-2025
+
+**Your Track**: [User's Industry]
+
+### Track Size Comparison
+
+**Complete Domain Breakdown** (All Products Side-by-Side):
+
+| Domain | Type | Monthly Traffic | Organic Keywords | Authority Score |
+|--------|------|-----------------|------------------|-----------------|
+| [your_domain1] | Your Product | [X]K | [Y]K | [Z] |
+| [your_domain2] | Your Product | [X]K | [Y]K | [Z] |
+| [competitor1] | Your Competitor | [X]K | [Y]K | [Z] |
+| [competitor2] | Your Competitor | [X]K | [Y]K | [Z] |
+| [benchmark1] | Benchmark (Hot Track) | [X]K | [Y]K | [Z] |
+| [benchmark2] | Benchmark (Hot Track) | [X]K | [Y]K | [Z] |
+| [benchmark3] | Benchmark (Hot Track) | [X]K | [Y]K | [Z] |
+
+**Track Averages**:
+
+| Track | Avg Monthly Traffic | Avg Keywords | Avg Authority | Gap vs Benchmark |
+|-------|---------------------|--------------|---------------|------------------|
+| Your Products | [X]K | [Y]K | [Z] | [W]x |
+| Your Competitors | [X]K | [Y]K | [Z] | [W]x |
+| Benchmark Track | [X]K | [Y]K | [Z] | 1.0x (baseline) |
+
+### Track Gap Interpretation
+
+**Track Multiplier**: [Z]x
+
+**What This Means**:
+
+[IF gap < 2x]:
+- Your track and the benchmark track have similar SEO potential
+- Both are attracting comparable organic traffic levels
+- Competition level may be similar
+
+[IF gap 2-5x]:
+- Moderate track size difference
+- The benchmark track is more popular currently
+- Your track may be more mature or niche
+
+[IF gap 5-10x]:
+- Significant track size difference  
+- The benchmark track is substantially more popular
+- Consider this context when setting SEO goals
+
+[IF gap > 10x]:
+- Major track popularity gap
+- The benchmark track is in an exceptionally high-growth phase
+- Your track is more established/niche or earlier stage
+
+### Strategic Context
+
+**For SEO Planning**:
+- Use benchmark traffic as a reference ceiling, not a direct goal
+- [Smaller/Similar/Larger] track size suggests [adjust strategy accordingly]
+- Set realistic growth targets based on track maturity
+
+**For Business Decisions**:
+- Track popularity doesn't determine product success
+- Niche/mature tracks can have strong monetization
+- Consider product-market fit over pure traffic volume
+
+**Note**: This benchmark compares TRACK POPULARITY, not your product quality or competitive position. Products in smaller tracks can achieve excellent business outcomes through differentiation and strong product-market fit.
+
+---
+
+**Sources**: Perplexity AI search, Semrush domain data
+
+---
+
+**Phase 6: Root Cause Investigation - MANDATORY IF FLUCTUATIONS DETECTED**
+
+**🚨 CRITICAL: MAXIMUM SEARCH INTENSITY - 40-50 searches per fluctuation**
+**🔥 PERPLEXITY-POWERED: Use perplexity_search as PRIMARY tool (80% of searches)**
+
+**🔴 EXECUTION TRIGGER (MANDATORY CHECK):**
+
+STEP 1 - CHECK EVERY DOMAIN FROM PHASE 2:
+FOR EACH domain that you analyzed with semrush_domain_history():
+  - Check the response object
+  - Access response["fluctuation_investigation"]["requires_investigation"]
+  - IF this field === true:
+    → Phase 6 is MANDATORY for this domain
+    → Extract response["fluctuation_investigation"]["detected_fluctuations"]
+    → Proceed with ULTRA-DEEP investigation below
+
+STEP 2 - IF NO DOMAINS NEED INVESTIGATION:
+  - Document: "No significant fluctuations detected (all changes <15% MoM threshold)"
+  - Skip Phase 6
+  
+**🚨 DO NOT SKIP PHASE 6 IF ANY DOMAIN HAS requires_investigation === true!**
+
+**INVESTIGATION PROTOCOL (5-LAYER DEEP SEARCH):**
+
+FOR EACH domain with significant fluctuations (>15% MoM):
+  
+  **STEP 1: Extract Fluctuation Data**
+  
+  From response["fluctuation_investigation"]["detected_fluctuations"], extract:
+    - month (e.g., "20250815")
+    - type (spike or drop)
+    - change_percent
+    - traffic_before
+    - traffic_after
+  
+  **STEP 2: Convert Date to Readable Format**
+  - "20250815" → "August 2025" or "Aug 2025"
+  - Calculate date ranges: 
+    * Pre-period: 2 weeks before (e.g., "July 15-31")
+    * During: Full month (e.g., "August 1-31")
+    * Post-period: 2 weeks after (e.g., "September 1-15")
+  
+  **STEP 3: LAYER 1 - Brand Intelligence (12 searches)**
+  
+  **Brand Events & Announcements:**
+  1. perplexity_search(query="{domain} OR {brand} news announcement {month} {year}")
+  2. perplexity_search(query="{domain} OR {brand} product launch new feature {month} {year}")
+  3. perplexity_search(query="{brand} {month} {year} site:producthunt.com OR site:ycombinator.com OR site:hackernews.com")
+  4. perplexity_search(query="{brand} press release announcement {month} {year}")
+  5. perplexity_search(query="{brand} changelog release notes update {month} {year}")
+  
+  **Brand Sentiment & Community:**
+  6. perplexity_search(query="{domain} OR {brand} {month} {year} site:reddit.com")
+  7. perplexity_search(query="{domain} OR {brand} {month} {year} site:twitter.com OR site:x.com")
+  8. perplexity_search(query="{brand} feedback review {month} {year} site:reddit.com/r/seo OR site:reddit.com/r/marketing")
+  9. perplexity_search(query="{brand} discussion thread {month} {year} inurl:forum OR inurl:community")
+  
+  **Brand Crises & Issues:**
+  10. perplexity_search(query="{brand} outage downtime issue problem {month} {year}")
+  11. perplexity_search(query="{brand} controversy scandal negative {month} {year}")
+  12. perplexity_search(query="{brand} bug error complaint {month} {year} site:reddit.com OR site:twitter.com")
+  
+  **STEP 4: LAYER 2 - Content & SEO Strategy (10 searches)**
+  
+  **Content Publishing:**
+  13. perplexity_search(query="site:{domain} {month} {year}")
+  14. perplexity_search(query="{domain} new blog posts articles {month} {year}")
+  15. perplexity_search(query="{domain} content update refresh {month} {year}")
+  16. perplexity_search(query="{brand} content marketing strategy {month} {year}")
+  17. serper_search(query="site:{domain} after:{prev_month_date} before:{next_month_date}")
+  
+  **Backlink & PR:**
+  18. perplexity_search(query="{domain} mentioned featured {month} {year}")
+  19. perplexity_search(query="{brand} media coverage press {month} {year}")
+  20. perplexity_search(query="{domain} backlink new links {month} {year}")
+  21. perplexity_search(query="{brand} partnership collaboration {month} {year}")
+  22. serper_search(query="{domain} inurl:blog OR inurl:news {month} {year}")
+  
+  **STEP 5: LAYER 3 - Algorithm Intelligence (12 searches)**
+  
+  **Google Core Updates:**
+  23. perplexity_search(query="Google algorithm update {month} {year}")
+  24. perplexity_search(query="Google core update {month} {year} site:searchengineland.com OR site:searchenginejournal.com")
+  25. perplexity_search(query="Google update {month} {year} site:moz.com OR site:ahrefs.com OR site:semrush.com")
+  26. perplexity_search(query="Google {month} {year} ranking volatility SERP changes")
+  27. perplexity_search(query="Google Helpful Content update {month} {year}")
+  
+  **AI Search Features:**
+  28. perplexity_search(query="Google AI Overview SGE {month} {year} traffic impact")
+  29. perplexity_search(query="Google Search Generative Experience {month} {year} organic traffic")
+  30. perplexity_search(query="Google AI features {month} {year} zero-click searches")
+  
+  **Industry-Specific Algorithm Impact:**
+  31. perplexity_search(query="Google algorithm {month} {year} {industry} sites")
+  32. perplexity_search(query="Google update {month} {year} AI content tools SaaS")
+  33. perplexity_search(query="{month} {year} SEO volatility {industry}")
+  34. perplexity_search(query="SERP changes {month} {year} {industry} keywords")
+  
+  **STEP 6: LAYER 4 - Competitive Intelligence (8 searches)**
+  
+  **Direct Competitors:**
+  35. perplexity_search(query="{competitor1} traffic changes {month} {year}")
+  36. perplexity_search(query="{competitor2} update launch {month} {year}")
+  37. perplexity_search(query="{competitor1} OR {competitor2} {month} {year} SEO ranking")
+  
+  **Market & Industry:**
+  38. perplexity_search(query="{industry} market trends {month} {year}")
+  39. perplexity_search(query="{industry} new competitor launch {month} {year}")
+  40. perplexity_search(query="{industry} traffic patterns {month} {year}")
+  41. serper_search(query="{industry} market share report {month} {year}")
+  42. perplexity_search(query="{industry} search behavior changes {month} {year}")
+  
+  **STEP 7: LAYER 5 - Technical & Data Validation (8 searches)**
+  
+  **Technical SEO:**
+  43. perplexity_search(query="{domain} technical SEO issue {month} {year}")
+  44. perplexity_search(query="{domain} site speed performance {month} {year}")
+  45. perplexity_search(query="{domain} indexing problem crawl error {month} {year}")
+  46. serper_search(query="site:{domain} cache:{month}")
+  
+  **External Validation:**
+  47. perplexity_search(query="{domain} traffic report analytics {month} {year} site:similarweb.com OR site:ahrefs.com")
+  48. perplexity_search(query="{brand} ranking tracker data {month} {year}")
+  49. perplexity_search(query="SEO case study {month} {year} {industry} traffic drop OR traffic spike")
+  50. perplexity_search(query="{month} {year} search trends {industry} Google Trends")
+  
+  
+  **STEP 8: Data Synthesis & Pattern Recognition**
+  
+  After completing 50 searches, analyze patterns:
+  - Count mentions by category (Brand: X, Algorithm: Y, Content: Z, etc.)
+  - Identify date clusters (multiple events in same week)
+  - Cross-validate between sources (do 3+ sources confirm same event?)
+  - Check timing precision (did event occur BEFORE traffic change?)
+  
+  **STEP 9: Cross-Reference with Phase 2 Quantitative Data**
+  
+  Validate qualitative findings with hard data:
+  - Keyword ranking changes: Did specific keywords drop/spike?
+  - Page indexing changes: Were pages added/removed?
+  - Backlink velocity: Did backlink count change significantly?
+  - Organic cost: Did overall keyword value change?
+  - Competitor comparison: Did ALL competitors see same pattern?
+  
+  **STEP 10: Root Cause Classification**
+  
+  Based on 40-50 searches, determine PRIMARY and SECONDARY causes:
+  
+  **PRIMARY CAUSE** (most likely, >60% confidence):
+  - **Algorithm Impact**: Google core/helpful content/spam update
+  - **Brand Event**: Product launch, feature release, rebrand, funding
+  - **Content Strategy**: Major publishing initiative, PSEO launch, blog overhaul
+  - **Technical Issue**: Site outage, indexing bug, crawl block, migration
+  - **Competitive Disruption**: Major competitor launch or aggressive campaign
+  - **Industry Shift**: Sector-wide search behavior or market change
+  - **AI Search Impact**: Google SGE/AI Overview reducing organic clicks
+  - **Link Profile Change**: Major backlink gain/loss, penalty
+  - **Seasonal Pattern**: Predictable cyclical trend
+  - **Unknown**: Insufficient evidence despite exhaustive search
+  
+  **SECONDARY CAUSE** (contributing factor, 20-40% confidence):
+  [Same categories as above]
+  
+  **STEP 11: Build Detailed Evidence Timeline**
+  
+  Create chronological narrative with ALL sources:
+  
+  ### {Domain} - {Month Year} {Type} ({Change}% MoM)
+  
+  **Traffic Impact**: {Before} → {After} ({Absolute_Change} visitors)
+  
+  #### Evidence Timeline (50 sources analyzed)
+  
+  **Pre-Period (2 weeks before)**:
+  - **{Date}**: {Event description}
+    - Source: [{Title}]({URL})
+    - Key Quote: "{Exact quote from source}"
+    - Relevance: {How this relates to traffic change}
+  
+  - **{Date}**: {Another event}
+    - Source: [{Title}]({URL})
+    - Key Finding: {Summary}
+  
+  **During Period ({Month dates})**:
+  - **{Date}**: {Event}
+    - Source: [{Title}]({URL})
+    - Impact: {Specific impact on rankings/traffic}
+  
+  [... continue for ALL relevant events found ...]
+  
+  **Post-Period (2 weeks after)**:
+  - **{Date}**: {Recovery/continuation pattern}
+    - Source: [{Title}]({URL})
+  
+  #### Source Summary by Category
+  
+  | Category | Sources Found | Key Findings |
+  |----------|--------------|--------------|
+  | Brand Events | {X} sources | {Summary} |
+  | Algorithm Updates | {Y} sources | {Summary} |
+  | Content/SEO Changes | {Z} sources | {Summary} |
+  | Technical Issues | {A} sources | {Summary} |
+  | Competitive Intel | {B} sources | {Summary} |
+  | Industry Context | {C} sources | {Summary} |
+  | **TOTAL** | **{50}** | **{Overall pattern}** |
+  
+  #### Cross-Validation Analysis
+  
+  **Timing Alignment**:
+  ✅ Event occurred {X} days BEFORE traffic change (strong causal link)
+  OR
+  ⚠️ Event timing unclear - traffic change preceded known events (weak link)
+  
+  **Source Agreement**:
+  ✅ {X}/50 sources confirm same root cause
+  OR
+  ⚠️ Sources show conflicting explanations
+  
+  **Competitor Pattern**:
+  ✅ {X} of {Y} competitors experienced similar changes (industry-wide)
+  OR
+  ❌ No competitors affected (brand-specific issue)
+  
+  **Data Correlation**:
+  ✅ Keyword rankings changed in same direction as traffic
+  ✅ Page indexing showed {X} new/removed pages
+  ✅ Backlink count changed by {Y}%
+  OR
+  ⚠️ Data shows conflicting signals
+  
+  #### Root Cause Determination
+  
+  **PRIMARY CAUSE**: {Category}
+  **Confidence Level**: {9.5}/10 (Very High / High / Medium / Low)
+  
+  **Explanation**:
+  {2-3 paragraphs explaining the most likely cause based on:
+   - Volume of supporting evidence (X sources)
+   - Timing precision (event → traffic change lag)
+   - Cross-validation across multiple source types
+   - Correlation with quantitative data
+   - Competitor comparison results}
+  
+  **SECONDARY CONTRIBUTING FACTORS**:
+  1. {Factor 1} (Confidence: {X}/10)
+     - Evidence: {Brief summary}
+  
+  2. {Factor 2} (Confidence: {Y}/10)
+     - Evidence: {Brief summary}
+  
+  #### Detailed Source List (Top 20 Most Relevant)
+  
+  1. **{Source Title}**
+     - URL: {link}
+     - Published: {date}
+     - Relevance: ⭐⭐⭐⭐⭐ (5/5)
+     - Key Quote: "{Extract}"
+     - Why Important: {Explanation}
+  
+  2. **{Source Title}**
+     - URL: {link}
+     - Published: {date}
+     - Relevance: ⭐⭐⭐⭐ (4/5)
+     - Key Finding: {Summary}
+  
+  [... continue for top 20 sources ...]
+  
+  #### Actionable Insights
+  
+  **What This Means**:
+  - {Implication 1}
+  - {Implication 2}
+  - {Implication 3}
+  
+  **How to Respond**:
+  1. {Immediate action based on root cause}
+  2. {Medium-term strategy}
+  3. {Long-term prevention}
+  
+  **How to Prevent/Replicate**:
+  - If negative: {Prevention strategy}
+  - If positive: {Replication strategy}
+
+**STEP 12: CRITICAL VALIDATION CHECKLIST**
+
+✅ Before completing Phase 6, verify ALL of these:
+- [ ] Executed 40-50 searches per significant fluctuation (not 20!)
+- [ ] Used perplexity_search for 80%+ of searches
+- [ ] Documented 20+ cited sources with URLs per fluctuation
+- [ ] Created detailed timeline with specific dates
+- [ ] Calculated confidence scores (X/10) for each conclusion
+- [ ] Cross-validated findings across 3+ independent source types
+- [ ] Checked timing: event occurred BEFORE traffic change
+- [ ] Compared with competitor data (same pattern or unique?)
+- [ ] Correlated with Phase 2 quantitative data (keywords, pages, backlinks)
+- [ ] Categorized PRIMARY and SECONDARY root causes
+- [ ] Provided actionable recommendations based on findings
+- [ ] Listed top 20 sources with relevance ratings
+
+❌ ABSOLUTELY UNACCEPTABLE outputs:
+- "Limited sources available" (you have 50 searches!)
+- Generic "algorithm changes" without naming specific update
+- Single-source conclusions
+- Missing URLs or vague citations
+- No confidence scores
+- No timeline with dates
+- Mixing up correlation with causation
+- Copy-pasting search queries instead of synthesizing results
+- Less than 15 sources cited per fluctuation
+- No cross-validation between sources
+
+**EXECUTION TIP:**
+- Run searches in batches of 10 (5 layers × 10 searches)
+- Allow perplexity_search to complete before next batch
+- If a search returns "no results", try alternative phrasing
+- Extract specific quotes, URLs, and dates from each result
+- Keep running log of sources as you search
+
+**If NO significant fluctuations detected:**
+  → Document: "No significant fluctuations detected (all changes <15% MoM threshold)"
+  → Skip detailed investigation
+  → Note: "Phase 6 skipped - stable traffic patterns, no volatility requiring deep investigation"
+
+**If API rate limits hit:**
+  → Document number of searches completed
+  → Proceed with available data
+  → Note: "Investigation limited to {X} searches due to API constraints"
+  → Still provide best analysis with available evidence
+
+---
+
+**Phase 7: Report Generation (ALL REQUIRED)**
+
+**🎯 GOAL**: Create executive-ready, actionable report with data-driven insights
+
+**REPORT STRUCTURE (7 Sections):**
+
+**Section 0: Executive Summary (NEW! - CRITICAL)**
+
+This is a 1-page overview that busy executives can read in 2-3 minutes.
+
+### Executive Summary
+
+**Analysis Period**: [Start Date] - [End Date]
+**Markets Analyzed**: [US/UK/etc.]
+**Domains Analyzed**: [X competitors + your domain]
+
+**Key Findings (Top 3)**:
+
+1. **[Most Important Insight]**
+   - Data: [specific metric with % change]
+   - Impact: [business implication]
+   - Action: [immediate next step]
+
+2. **[Second Critical Insight]**
+   - Data: [specific metric]
+   - Impact: [what it means]
+   - Action: [recommended action]
+
+3. **[Third Key Finding]**
+   - Data: [metric]
+   - Impact: [implication]
+   - Action: [next step]
+
+**Traffic Performance Snapshot**:
+
+| Metric | Your Domain | Top Competitor | Industry Benchmark | Gap |
+|--------|-------------|----------------|---------------------|-----|
+| Monthly Traffic | [X] | [Y] | [Z] | [%] |
+| Keyword Portfolio | [X] | [Y] | [Z] | [%] |
+| Authority Score | [X] | [Y] | [Z] | [pts] |
+| 12M Growth Rate | [X]% | [Y]% | [Z]% | [pts] |
+
+**Critical Issues Detected** (if any):
+- 🔴 [Urgent issue requiring immediate action]
+- 🟡 [Moderate issue - address within 30 days]
+- 🟢 [Opportunity to capitalize on]
+
+**Priority Recommendations** (Ranked by ROI):
+
+**HIGH PRIORITY (Do This Week)**:
+1. [Action item] - Est. Impact: [+X% traffic or specific outcome]
+2. [Action item] - Est. Impact: [outcome]
+3. [Action item] - Est. Impact: [outcome]
+
+**MEDIUM PRIORITY (Do This Month)**:
+4. [Action item] - Est. Impact: [outcome]
+5. [Action item] - Est. Impact: [outcome]
+
+**LOW PRIORITY (Do This Quarter)**:
+6. [Action item] - Est. Impact: [outcome]
+
+**Investment Required**:
+- Time: [X hours/week]
+- Budget: [$ or resource requirements]
+- Team: [roles needed]
+
+**Expected Outcomes (90-day projection)**:
+- Traffic: +[X]% ([current] → [projected])
+- Keywords: +[X]% ([current] → [projected])
+- Authority: +[X] points ([current] → [projected])
+
+---
+
+**Section 1: Market Overview & Competitive Landscape**
+
+[Include previous Executive Overview content, expanded with:]
+
+**Competitive Positioning Matrix**:
+
+| Domain | Traffic Tier | Authority Tier | Growth Stage | Strategic Focus |
+|--------|--------------|----------------|--------------|-----------------|
+| [domain1] | Leader (Top 25%) | Strong (50+) | Mature | Market defense |
+| [domain2] | Challenger (25-50%) | Growing (30-50) | Growth | Market share gain |
+| [domain3] | Emerging (<25%) | Developing (<30) | Launch | Rapid scaling |
+
+**Market Dynamics**:
+- Total addressable market (TAM) traffic: [estimate]
+- Your current market share: [%]
+- Growth rate vs market: [faster/slower/aligned]
+- Competitive intensity: [High/Medium/Low]
+
+**Section 2: Traffic Trend Analysis** 
+[Use the enhanced format from Phase 2 with MoM% changes]
+
+**Section 3: Content, Keywords & Technical SEO**
+[Use the comprehensive analysis from Phase 3]
+
+**Add new subsections:**
+
+### Competitive Content Gap Analysis
+
+| Content Type | Your Domain | Top Competitor | Gap | Opportunity |
+|--------------|-------------|----------------|-----|-------------|
+| Blog Posts | [X] | [Y] | [Y-X] | [Est. traffic gain] |
+| Product Pages | [X] | [Y] | [Y-X] | [Est. conversion gain] |
+| Landing Pages | [X] | [Y] | [Y-X] | [Est. lead gain] |
+| Tool/Calculator Pages | [X] | [Y] | [Y-X] | [Est. engagement gain] |
+| Video Content | [X] | [Y] | [Y-X] | [Est. social gain] |
+
+### Technical SEO Scorecard
+
+| Factor | Your Domain | Top Competitor | Industry Std | Status |
+|--------|-------------|----------------|--------------|--------|
+| Page Speed (LCP) | [Xs] | [Ys] | <2.5s | ✅/⚠️/❌ |
+| Mobile Score | [X]/100 | [Y]/100 | >90 | ✅/⚠️/❌ |
+| Core Web Vitals | Pass/Fail | Pass/Fail | Pass | ✅/❌ |
+| Structured Data | [X types] | [Y types] | 5+ types | ✅/⚠️/❌ |
+| HTTPS | Yes/No | Yes/No | Yes | ✅/❌ |
+| XML Sitemap | Yes/No | Yes/No | Yes | ✅/❌ |
+
+**Section 4: Growth Strategy & Root Cause Analysis**
+
+**🚨 CRITICAL: This section MUST include Phase 6 investigation results if ANY fluctuations were detected!**
+
+**IF Phase 6 was executed (fluctuations detected):**
+- Include complete Root Cause Investigation for EACH significant fluctuation
+- Show 20+ sources per fluctuation
+- Display 5-layer search architecture results
+- Include Evidence Timeline, Confidence Scores, Primary/Secondary causes
+- NEVER write generic content like "likely due to algorithm updates" - provide SPECIFIC evidence
+
+**IF Phase 6 was skipped (no fluctuations):**
+- Document: "No significant traffic fluctuations (>15% MoM) detected during analysis period"
+- Focus on growth strategies and playbook recommendations
+
+[Use the detailed investigation from Phase 6 with 20+ sources per fluctuation]
+
+**Add new subsection:**
+
+### Growth Playbook - What's Working for Competitors
+
+**[Top Competitor Name]'s Success Factors:**
+
+1. **Content Strategy** (Est. 40% of traffic)
+   - What they're doing: [specific tactics]
+   - Volume: [X posts/month]
+   - Quality signals: [word count, multimedia, engagement]
+   - Replication cost: [$ and time]
+   - Your action: [specific steps]
+
+2. **Technical Excellence** (Est. 15% advantage)
+   - Speed optimization: [specific tech]
+   - Mobile experience: [specifics]
+   - Schema implementation: [types used]
+   - Your action: [specific steps]
+
+3. **Link Building** (Est. 25% of authority)
+   - Strategy: [PR/content/partnerships]
+   - Velocity: [X links/month]
+   - Quality: [average AS of sources]
+   - Your action: [specific steps]
+
+4. **Keyword Strategy** (Est. 20% of visibility)
+   - Targeting: [long-tail/head terms mix]
+   - Intent focus: [commercial/informational mix]
+   - Ranking speed: [time to page 1]
+   - Your action: [specific steps]
+
+**Estimated Cost to Replicate**: $[X]/month, [Y] hours/week
+**Expected Timeline**: [X] months to reach parity
+**ROI Projection**: [X]x return on investment
+
+**Section 5: Conclusions & Action Plan**
+
+### Strategic Recommendations (Prioritized by Impact/Effort)
+
+**QUICK WINS (High Impact, Low Effort)** - Do First:
+
+1. **[Recommendation Title]**
+   - What: [specific action]
+   - Why: [data-driven reason]
+   - How: [step-by-step process]
+   - Effort: [X hours]
+   - Impact: +[Y]% traffic in [Z] weeks
+   - Success Metric: [KPI to track]
+   - Status: [ ] Not Started [ ] In Progress [ ] Completed
+
+2. **[Next Quick Win]**
+   - [Same format]
+
+**HIGH IMPACT INITIATIVES (High Impact, Medium Effort)** - Do Next:
+
+3. **[Initiative Title]**
+   - [Same detailed format]
+
+4. **[Next Initiative]**
+   - [Same format]
+
+**LONG-TERM PLAYS (High Impact, High Effort)** - Plan for Q2/Q3:
+
+5. **[Strategic Initiative]**
+   - [Same format]
+
+### 90-Day Action Calendar
+
+**Week 1-2**:
+- [ ] [Specific task]
+- [ ] [Specific task]
+- [ ] [Specific task]
+
+**Week 3-4**:
+- [ ] [Specific task]
+- [ ] [Specific task]
+
+**Month 2**:
+- [ ] [Milestone]
+- [ ] [Milestone]
+
+**Month 3**:
+- [ ] [Milestone]
+- [ ] [Measurement checkpoint]
+
+### Success Metrics & KPIs
+
+Track these weekly:
+- Organic traffic: [current] → [target] (+[X]%)
+- Keyword rankings (Top 10): [current] → [target] (+[X])
+- Backlinks: [current] → [target] (+[X])
+- Authority Score: [current] → [target] (+[X] pts)
+
+**Review this report monthly and update projections based on actual results.**
+
+---
+
+**Section 6: Data Limitations & Methodology**
+[List all API failures, workarounds used, data quality notes]
+
+---
+
+**Section 7: Appendix - Detailed Data Tables**
+[Include full raw data tables for reference]
+
+**FORMATTING REQUIREMENTS:**
+
+**⚠️ MARKDOWN TABLE FORMATTING - CRITICAL:**
+- ALWAYS add a BLANK LINE before each table
+- ALWAYS add a BLANK LINE after each table
+- Without blank lines, tables will NOT render correctly!
+
+Example (CORRECT):
+
+**Traffic Comparison**
+
+| Domain | Traffic | Keywords |
+|--------|---------|----------|
+| example.com | 50,000 | 1,200 |
+
+Next section starts here...
+
+**⚠️ VISUAL INDICATORS:**
+- Use ✅ ⚠️ ❌ for status (GREEN/YELLOW/RED)
+- Use ↑ ↓ → for trends (UP/DOWN/FLAT)
+- Use 🔴 🟡 🟢 for priority (URGENT/MEDIUM/LOW)
+- Use percentages with + or - sign (+15%, -10%)
+
+**⚠️ CITATION FORMAT:**
+- Inline citations: [Source Name](https://url)
+- Group related citations: [Source1](url1), [Source2](url2)
+- Add "Sources" subsection at end of each major section
+
+2. **CRITICAL: Call markdown_to_html_report tool**
+   - markdown_to_html_report(markdown=markdown_content, title="Competitor SEO Growth Engine Audit Report")
+   - DO NOT generate HTML yourself - USE THE TOOL
+   - The tool will automatically generate:
+     * Modern responsive design with sidebar navigation
+     * Chart.js visualizations
+     * Professional Blue-Teal-Purple gradient theme
+     * Mobile-responsive layout
+   
+3. **Call markdown_to_docx tool**
+   - markdown_to_docx(markdown=markdown_content, filename="competitor-audit-{timestamp}")
+   - DO NOT generate DOCX yourself - USE THE TOOL
+
+4. **🔴 MANDATORY: Update TODO status**
+   - After calling both tools above, IMMEDIATELY call todo_write
+   - Mark Phase 7 as "completed"
+   - This is NOT optional - users need to see task completion!
+
+**QUALITY CHECKLIST:**
+Before finishing, verify:
+- [ ] Executive Summary is 1 page, scannable in 2-3 minutes
+- [ ] Top 3 findings are data-driven with specific numbers
+- [ ] Priority recommendations ranked by ROI (not just listed)
+- [ ] Each recommendation has: What/Why/How/Effort/Impact/Metric
+- [ ] 90-day action calendar with specific tasks
+- [ ] All tables have blank lines before/after
+- [ ] All metrics have units (%, K, points, etc.)
+- [ ] All claims have inline citations with URLs
+- [ ] Technical SEO scorecard included
+- [ ] Competitive content gap analysis included
+- [ ] Growth playbook with replication costs
+- [ ] Success metrics clearly defined
+- [ ] markdown_to_html_report TOOL was CALLED
+- [ ] markdown_to_docx TOOL was CALLED  
+- [ ] todo_write was CALLED to mark Phase 7 completed
+
+**If missing any checklist item, fix it before finishing!**
+
+**CRITICAL CHECKPOINT:**
+Before finishing, verify:
+- [ ] All 7 Phases executed (check logs)
+- [ ] All 5 report sections present in Markdown
+- [ ] Track Benchmarking section uses "track gap" framing (NOT "you are behind")
+- [ ] markdown_to_html_report TOOL was CALLED (check tool call logs)
+- [ ] markdown_to_docx TOOL was CALLED (check tool call logs)
+- [ ] todo_write was CALLED to mark Phase 7 as completed ⚠️
+- [ ] HTML file has modern design with sidebar navigation (not simple CSS)
+- [ ] Report includes "Data Limitations" section if any APIs failed
+
+**If HTML looks simple (no sidebar, basic CSS):**
+→ You manually created HTML instead of calling the tool
+→ This is WRONG - call markdown_to_html_report tool again
+
+---
+
+**Critical Rules:**
+
+1. **Execution is MANDATORY - NO SKIPPING**
+   - ALL 7 Phases MUST be executed in order
+   - IF an API returns empty data or error: DOCUMENT IT and CONTINUE
+   - DO NOT skip phases due to empty data
+   - DO NOT stop execution if one tool fails
+   - Example: IF semrush_domain_history fails → Write "Data unavailable due to API error" → CONTINUE to Phase 3
+
+2. **Error Handling Protocol**
+   - IF API returns HTTP error: Log error message, set data to "API Error", CONTINUE
+   - IF API returns 0 results: Set data to "No data available", CONTINUE
+   - IF API times out: Set data to "Request timeout", CONTINUE
+   - NEVER say "Analysis stopped due to errors" - ALWAYS complete all phases
+   - At end of report, include "Data Limitations" section explaining what failed
+
+3. **Comparative Analysis is MANDATORY**
+   - Execute Phase 3 tools (pages, keywords, backlinks) for BOTH competitors AND my_domain
+   - Generate comparison tables showing side-by-side metrics
+   - IF data missing for one domain, show "Data unavailable" but include other domains
+   - Highlight gaps and opportunities based on available data
+
+4. **Data Quality Standards**
+   - ALL data must be labeled with market (e.g., "Monthly Traffic (US Market)")
+   - Use inline citations [Source](url), NOT footnotes
+   - NO emojis or Unicode symbols in report (ASCII only)
+   - Include API URLs in methodology notes
+   - IF data is partial/incomplete, add note: "(Partial data - see limitations)"
+
+5. **Investigation Protocol**
+   - IF requires_investigation === true, Phase 6 is MANDATORY
+   - IF no fluctuations detected, document: "No significant fluctuations (>15% MoM) detected"
+   - Complete ALL search rounds before concluding root cause
+   - Provide confidence level (High/Medium/Low) for each root cause
+   - Include evidence URLs from perplexity_search citations
+
+6. **Report Completeness - NON-NEGOTIABLE**
+   - Generate ALL 3 formats: Markdown + HTML + DOCX (even if data is partial)
+   - Include all 5 core sections (use "Data unavailable" if needed)
+   - Minimum viable report structure:
+     * Section 1: Overview table (even with partial data)
+     * Section 2: History table OR error explanation
+     * Section 3: Content analysis OR "No data available"
+     * Section 4: Fluctuation analysis OR "No fluctuations detected"
+     * Section 5: Recommendations based on available data
+   - Add "Data Limitations" section at end explaining what APIs failed
+   
+   **CRITICAL - HTML Generation:**
+   - You MUST call markdown_to_html_report TOOL (do NOT write HTML yourself)
+   - You MUST call markdown_to_docx TOOL (do NOT write DOCX yourself)
+   - The tools will automatically add:
+     * Sidebar navigation
+     * Modern styling (Blue-Teal-Purple theme)
+     * Chart.js visualizations
+     * Responsive design
+   - DO NOT create simple HTML with basic CSS - USE THE TOOLS
+
+7. **Cost Control**
+   - Use display_limit parameters wisely
+   - Batch operations when possible
+   - Only invoke Phase 6 if fluctuations detected
+
+---
+
+**🚨 FINAL REMINDER - READ THIS BEFORE STARTING:**
+
+1. **NEVER STOP EXECUTION** - API errors are EXPECTED, not reasons to quit
+2. **DOCUMENT, DON'T SKIP** - If data is missing, write "Data unavailable" and CONTINUE
+3. **ALL 7 PHASES REQUIRED** - Even with errors, execute every phase
+4. **COMPLETE REPORT MANDATORY** - Generate Markdown + HTML + DOCX no matter what
+5. **PARTIAL DATA IS ACCEPTABLE** - A report with "No data available" is better than no report
+6. **USE TOOLS, DON'T CREATE FILES YOURSELF** - Call markdown_to_html_report and markdown_to_docx tools
+
+**Common API failures you WILL encounter:**
+- semrush_domain_history may return 0 data → Document it + CONTINUE
+- semrush_domain_organic_pages may return 0 pages → Document it + CONTINUE  
+- semrush_organic_keywords may return 0 keywords → Document it + CONTINUE
+- perplexity_search may fail → Document it + use available data
+
+**🚨 DO NOT MANUALLY CREATE HTML/DOCX FILES:**
+- DO NOT write HTML with <html><head><style> yourself
+- DO NOT create Word documents manually
+- ALWAYS call markdown_to_html_report(markdown=content, title="...")
+- ALWAYS call markdown_to_docx(markdown=content, filename="...")
+- The tools have professional templates built-in (sidebar nav, charts, modern design)
+
+**Your success metric:** 
+1. Did you generate complete 5-section Markdown report? YES/NO
+2. Did you CALL markdown_to_html_report tool? YES/NO
+3. Did you CALL markdown_to_docx tool? YES/NO
+4. Did you CALL todo_write to mark Phase 7 as completed? YES/NO
+
+**🔴 CRITICAL - BEFORE FINISHING:**
+After calling markdown_to_html_report and markdown_to_docx tools, you MUST call todo_write with:
+
+Example JSON format:
+{
+  "merge": true,
+  "todos": [
+    {
+      "id": "<phase_7_todo_id>",
+      "status": "completed"
+    }
+  ]
+}
+
+**DO NOT FORGET THIS STEP** - Users need to see all tasks marked as completed!
+
+---
+
+Starting analysis...
+

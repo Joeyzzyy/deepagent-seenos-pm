@@ -1,0 +1,3 @@
+**Phase 1: Batch Overview**
+- semrush_domain_overview_batch(domains=[all competitors + my_domain], database={{primary_market}})
+  → Quick comparison of SEO/PPC traffic, identify Top performers

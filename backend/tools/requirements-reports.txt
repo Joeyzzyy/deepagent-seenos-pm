@@ -1,0 +1,11 @@
+# Report Generation Tools Dependencies
+
+# For HTML report generation
+markdown>=3.5.0
+
+# For DOCX report generation
+python-docx>=1.1.0
+
+# Optional: For enhanced Markdown parsing
+pymdown-extensions>=10.0
+

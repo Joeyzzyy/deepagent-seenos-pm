@@ -1,0 +1,330 @@
+**Phase 6: Root Cause Investigation - MANDATORY IF FLUCTUATIONS DETECTED**
+
+**🚨 CRITICAL: MAXIMUM SEARCH INTENSITY - 40-50 searches per fluctuation**
+**🔥 PERPLEXITY-POWERED: Use perplexity_search as PRIMARY tool (80% of searches)**
+
+**🔴 EXECUTION TRIGGER (MANDATORY CHECK):**
+
+STEP 1 - CHECK EVERY DOMAIN FROM PHASE 2:
+FOR EACH domain that you analyzed with semrush_domain_history():
+  - Check the response object
+  - Access response["fluctuation_investigation"]["requires_investigation"]
+  - IF this field === true:
+    → Phase 6 is MANDATORY for this domain
+    → Extract response["fluctuation_investigation"]["detected_fluctuations"]
+    → Proceed with ULTRA-DEEP investigation below
+
+STEP 2 - IF NO DOMAINS NEED INVESTIGATION:
+  - Document: "No significant fluctuations detected (all changes <15% MoM threshold)"
+  - Skip Phase 6
+  
+**🚨 DO NOT SKIP PHASE 6 IF ANY DOMAIN HAS requires_investigation === true!**
+
+**INVESTIGATION PROTOCOL (5-LAYER DEEP SEARCH):**
+
+FOR EACH domain with significant fluctuations (>15% MoM):
+  
+  **STEP 1: Extract Fluctuation Data**
+  
+  From response["fluctuation_investigation"]["detected_fluctuations"], extract:
+    - month (e.g., "20250815")
+    - type (spike or drop)
+    - change_percent
+    - traffic_before
+    - traffic_after
+  
+  **STEP 2: Convert Date to Readable Format**
+  - "20250815" → "August 2025" or "Aug 2025"
+  - Calculate date ranges: 
+    * Pre-period: 2 weeks before (e.g., "July 15-31")
+    * During: Full month (e.g., "August 1-31")
+    * Post-period: 2 weeks after (e.g., "September 1-15")
+  
+  **STEP 3: LAYER 1 - Brand Intelligence (12 searches)**
+  
+  **Brand Events & Announcements:**
+  1. perplexity_search(query="{domain} OR {brand} news announcement {month} {year}")
+  2. perplexity_search(query="{domain} OR {brand} product launch new feature {month} {year}")
+  3. perplexity_search(query="{brand} {month} {year} site:producthunt.com OR site:ycombinator.com OR site:hackernews.com")
+  4. perplexity_search(query="{brand} press release announcement {month} {year}")
+  5. perplexity_search(query="{brand} changelog release notes update {month} {year}")
+  
+  **Brand Sentiment & Community:**
+  6. perplexity_search(query="{domain} OR {brand} {month} {year} site:reddit.com")
+  7. perplexity_search(query="{domain} OR {brand} {month} {year} site:twitter.com OR site:x.com")
+  8. perplexity_search(query="{brand} feedback review {month} {year} site:reddit.com/r/seo OR site:reddit.com/r/marketing")
+  9. perplexity_search(query="{brand} discussion thread {month} {year} inurl:forum OR inurl:community")
+  
+  **Brand Crises & Issues:**
+  10. perplexity_search(query="{brand} outage downtime issue problem {month} {year}")
+  11. perplexity_search(query="{brand} controversy scandal negative {month} {year}")
+  12. perplexity_search(query="{brand} bug error complaint {month} {year} site:reddit.com OR site:twitter.com")
+  
+  **STEP 4: LAYER 2 - Content & SEO Strategy (10 searches)**
+  
+  **Content Publishing:**
+  13. perplexity_search(query="site:{domain} {month} {year}")
+  14. perplexity_search(query="{domain} new blog posts articles {month} {year}")
+  15. perplexity_search(query="{domain} content update refresh {month} {year}")
+  16. perplexity_search(query="{brand} content marketing strategy {month} {year}")
+  17. serper_search(query="site:{domain} after:{prev_month_date} before:{next_month_date}")
+  
+  **Backlink & PR:**
+  18. perplexity_search(query="{domain} mentioned featured {month} {year}")
+  19. perplexity_search(query="{brand} media coverage press {month} {year}")
+  20. perplexity_search(query="{domain} backlink new links {month} {year}")
+  21. perplexity_search(query="{brand} partnership collaboration {month} {year}")
+  22. serper_search(query="{domain} inurl:blog OR inurl:news {month} {year}")
+  
+  **STEP 5: LAYER 3 - Algorithm Intelligence (12 searches)**
+  
+  **Google Core Updates:**
+  23. perplexity_search(query="Google algorithm update {month} {year}")
+  24. perplexity_search(query="Google core update {month} {year} site:searchengineland.com OR site:searchenginejournal.com")
+  25. perplexity_search(query="Google update {month} {year} site:moz.com OR site:ahrefs.com OR site:semrush.com")
+  26. perplexity_search(query="Google {month} {year} ranking volatility SERP changes")
+  27. perplexity_search(query="Google Helpful Content update {month} {year}")
+  
+  **AI Search Features:**
+  28. perplexity_search(query="Google AI Overview SGE {month} {year} traffic impact")
+  29. perplexity_search(query="Google Search Generative Experience {month} {year} organic traffic")
+  30. perplexity_search(query="Google AI features {month} {year} zero-click searches")
+  
+  **Industry-Specific Algorithm Impact:**
+  31. perplexity_search(query="Google algorithm {month} {year} {industry} sites")
+  32. perplexity_search(query="Google update {month} {year} AI content tools SaaS")
+  33. perplexity_search(query="{month} {year} SEO volatility {industry}")
+  34. perplexity_search(query="SERP changes {month} {year} {industry} keywords")
+  
+  **STEP 6: LAYER 4 - Competitive Intelligence (8 searches)**
+  
+  **Direct Competitors:**
+  35. perplexity_search(query="{competitor1} traffic changes {month} {year}")
+  36. perplexity_search(query="{competitor2} update launch {month} {year}")
+  37. perplexity_search(query="{competitor1} OR {competitor2} {month} {year} SEO ranking")
+  
+  **Market & Industry:**
+  38. perplexity_search(query="{industry} market trends {month} {year}")
+  39. perplexity_search(query="{industry} new competitor launch {month} {year}")
+  40. perplexity_search(query="{industry} traffic patterns {month} {year}")
+  41. serper_search(query="{industry} market share report {month} {year}")
+  42. perplexity_search(query="{industry} search behavior changes {month} {year}")
+  
+  **STEP 7: LAYER 5 - Technical & Data Validation (8 searches)**
+  
+  **Technical SEO:**
+  43. perplexity_search(query="{domain} technical SEO issue {month} {year}")
+  44. perplexity_search(query="{domain} site speed performance {month} {year}")
+  45. perplexity_search(query="{domain} indexing problem crawl error {month} {year}")
+  46. serper_search(query="site:{domain} cache:{month}")
+  
+  **External Validation:**
+  47. perplexity_search(query="{domain} traffic report analytics {month} {year} site:similarweb.com OR site:ahrefs.com")
+  48. perplexity_search(query="{brand} ranking tracker data {month} {year}")
+  49. perplexity_search(query="SEO case study {month} {year} {industry} traffic drop OR traffic spike")
+  50. perplexity_search(query="{month} {year} search trends {industry} Google Trends")
+  
+  
+  **STEP 8: Data Synthesis & Pattern Recognition**
+  
+  After completing 50 searches, analyze patterns:
+  - Count mentions by category (Brand: X, Algorithm: Y, Content: Z, etc.)
+  - Identify date clusters (multiple events in same week)
+  - Cross-validate between sources (do 3+ sources confirm same event?)
+  - Check timing precision (did event occur BEFORE traffic change?)
+  
+  **STEP 9: Cross-Reference with Phase 2 Quantitative Data**
+  
+  Validate qualitative findings with hard data:
+  - Keyword ranking changes: Did specific keywords drop/spike?
+  - Page indexing changes: Were pages added/removed?
+  - Backlink velocity: Did backlink count change significantly?
+  - Organic cost: Did overall keyword value change?
+  - Competitor comparison: Did ALL competitors see same pattern?
+  
+  **STEP 10: Root Cause Classification**
+  
+  Based on 40-50 searches, determine PRIMARY and SECONDARY causes:
+  
+  **PRIMARY CAUSE** (most likely, >60% confidence):
+  - **Algorithm Impact**: Google core/helpful content/spam update
+  - **Brand Event**: Product launch, feature release, rebrand, funding
+  - **Content Strategy**: Major publishing initiative, PSEO launch, blog overhaul
+  - **Technical Issue**: Site outage, indexing bug, crawl block, migration
+  - **Competitive Disruption**: Major competitor launch or aggressive campaign
+  - **Industry Shift**: Sector-wide search behavior or market change
+  - **AI Search Impact**: Google SGE/AI Overview reducing organic clicks
+  - **Link Profile Change**: Major backlink gain/loss, penalty
+  - **Seasonal Pattern**: Predictable cyclical trend
+  - **Unknown**: Insufficient evidence despite exhaustive search
+  
+  **SECONDARY CAUSE** (contributing factor, 20-40% confidence):
+  [Same categories as above]
+  
+  **STEP 11: Build Detailed Evidence Timeline**
+  
+  Create chronological narrative with ALL sources:
+  
+  ### {Domain} - {Month Year} {Type} ({Change}% MoM)
+  
+  **Traffic Impact**: {Before} → {After} ({Absolute_Change} visitors)
+  
+  #### Evidence Timeline (50 sources analyzed)
+  
+  **Pre-Period (2 weeks before)**:
+  - **{Date}**: {Event description}
+    - Source: [{Title}]({URL})
+    - Key Quote: "{Exact quote from source}"
+    - Relevance: {How this relates to traffic change}
+  
+  - **{Date}**: {Another event}
+    - Source: [{Title}]({URL})
+    - Key Finding: {Summary}
+  
+  **During Period ({Month dates})**:
+  - **{Date}**: {Event}
+    - Source: [{Title}]({URL})
+    - Impact: {Specific impact on rankings/traffic}
+  
+  [... continue for ALL relevant events found ...]
+  
+  **Post-Period (2 weeks after)**:
+  - **{Date}**: {Recovery/continuation pattern}
+    - Source: [{Title}]({URL})
+  
+  #### Source Summary by Category
+  
+  | Category | Sources Found | Key Findings |
+  |----------|--------------|--------------|
+  | Brand Events | {X} sources | {Summary} |
+  | Algorithm Updates | {Y} sources | {Summary} |
+  | Content/SEO Changes | {Z} sources | {Summary} |
+  | Technical Issues | {A} sources | {Summary} |
+  | Competitive Intel | {B} sources | {Summary} |
+  | Industry Context | {C} sources | {Summary} |
+  | **TOTAL** | **{50}** | **{Overall pattern}** |
+  
+  #### Cross-Validation Analysis
+  
+  **Timing Alignment**:
+  ✅ Event occurred {X} days BEFORE traffic change (strong causal link)
+  OR
+  ⚠️ Event timing unclear - traffic change preceded known events (weak link)
+  
+  **Source Agreement**:
+  ✅ {X}/50 sources confirm same root cause
+  OR
+  ⚠️ Sources show conflicting explanations
+  
+  **Competitor Pattern**:
+  ✅ {X} of {Y} competitors experienced similar changes (industry-wide)
+  OR
+  ❌ No competitors affected (brand-specific issue)
+  
+  **Data Correlation**:
+  ✅ Keyword rankings changed in same direction as traffic
+  ✅ Page indexing showed {X} new/removed pages
+  ✅ Backlink count changed by {Y}%
+  OR
+  ⚠️ Data shows conflicting signals
+  
+  #### Root Cause Determination
+  
+  **PRIMARY CAUSE**: {Category}
+  **Confidence Level**: {9.5}/10 (Very High / High / Medium / Low)
+  
+  **Explanation**:
+  {2-3 paragraphs explaining the most likely cause based on:
+   - Volume of supporting evidence (X sources)
+   - Timing precision (event → traffic change lag)
+   - Cross-validation across multiple source types
+   - Correlation with quantitative data
+   - Competitor comparison results}
+  
+  **SECONDARY CONTRIBUTING FACTORS**:
+  1. {Factor 1} (Confidence: {X}/10)
+     - Evidence: {Brief summary}
+  
+  2. {Factor 2} (Confidence: {Y}/10)
+     - Evidence: {Brief summary}
+  
+  #### Detailed Source List (Top 20 Most Relevant)
+  
+  1. **{Source Title}**
+     - URL: {link}
+     - Published: {date}
+     - Relevance: ⭐⭐⭐⭐⭐ (5/5)
+     - Key Quote: "{Extract}"
+     - Why Important: {Explanation}
+  
+  2. **{Source Title}**
+     - URL: {link}
+     - Published: {date}
+     - Relevance: ⭐⭐⭐⭐ (4/5)
+     - Key Finding: {Summary}
+  
+  [... continue for top 20 sources ...]
+  
+  #### Actionable Insights
+  
+  **What This Means**:
+  - {Implication 1}
+  - {Implication 2}
+  - {Implication 3}
+  
+  **How to Respond**:
+  1. {Immediate action based on root cause}
+  2. {Medium-term strategy}
+  3. {Long-term prevention}
+  
+  **How to Prevent/Replicate**:
+  - If negative: {Prevention strategy}
+  - If positive: {Replication strategy}
+
+**STEP 12: CRITICAL VALIDATION CHECKLIST**
+
+✅ Before completing Phase 6, verify ALL of these:
+- [ ] Executed 40-50 searches per significant fluctuation (not 20!)
+- [ ] Used perplexity_search for 80%+ of searches
+- [ ] Documented 20+ cited sources with URLs per fluctuation
+- [ ] Created detailed timeline with specific dates
+- [ ] Calculated confidence scores (X/10) for each conclusion
+- [ ] Cross-validated findings across 3+ independent source types
+- [ ] Checked timing: event occurred BEFORE traffic change
+- [ ] Compared with competitor data (same pattern or unique?)
+- [ ] Correlated with Phase 2 quantitative data (keywords, pages, backlinks)
+- [ ] Categorized PRIMARY and SECONDARY root causes
+- [ ] Provided actionable recommendations based on findings
+- [ ] Listed top 20 sources with relevance ratings
+
+❌ ABSOLUTELY UNACCEPTABLE outputs:
+- "Limited sources available" (you have 50 searches!)
+- Generic "algorithm changes" without naming specific update
+- Single-source conclusions
+- Missing URLs or vague citations
+- No confidence scores
+- No timeline with dates
+- Mixing up correlation with causation
+- Copy-pasting search queries instead of synthesizing results
+- Less than 15 sources cited per fluctuation
+- No cross-validation between sources
+
+**EXECUTION TIP:**
+- Run searches in batches of 10 (5 layers × 10 searches)
+- Allow perplexity_search to complete before next batch
+- If a search returns "no results", try alternative phrasing
+- Extract specific quotes, URLs, and dates from each result
+- Keep running log of sources as you search
+
+**If NO significant fluctuations detected:**
+  → Document: "No significant fluctuations detected (all changes <15% MoM threshold)"
+  → Skip detailed investigation
+  → Note: "Phase 6 skipped - stable traffic patterns, no volatility requiring deep investigation"
+
+**If API rate limits hit:**
+  → Document number of searches completed
+  → Proceed with available data
+  → Note: "Investigation limited to {X} searches due to API constraints"
+  → Still provide best analysis with available evidence
+
+---

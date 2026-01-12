@@ -1,0 +1,361 @@
+**Phase 7: Report Generation (ALL REQUIRED)**
+
+**🎯 GOAL**: Create executive-ready, actionable report with data-driven insights
+
+---
+**⚠️ CRITICAL INSTRUCTION - READ CAREFULLY:**
+
+You MUST follow this EXACT process:
+
+1. **FIRST**: Generate the COMPLETE Markdown report in your response
+   - Include ALL sections with REAL data from Phases 1-6
+   - Fill in EVERY placeholder with ACTUAL numbers and insights
+   - Do NOT use placeholder text like "[COMPLETE MARKDOWN REPORT...]"
+   
+2. **THEN**: Call `markdown_to_html_report` with the FULL report content
+   - Pass the ENTIRE markdown as the `markdown_content` parameter
+   - This MUST be thousands of characters, not a placeholder sentence
+   
+3. **THEN**: Call `markdown_to_docx` with the SAME full content
+
+**🚨 COMMON MISTAKE TO AVOID:**
+Do NOT pass a placeholder like "THE CONTENT WILL BE INSERTED HERE" to the tools.
+The tools only convert what you give them - they do NOT generate content.
+You must pass the ACTUAL, COMPLETE report with all real data.
+
+---
+
+**REPORT STRUCTURE (7 Sections):**
+
+**Section 0: Executive Summary (NEW! - CRITICAL)**
+
+This is a 1-page overview that busy executives can read in 2-3 minutes.
+
+### Executive Summary
+
+**Analysis Period**: [Start Date] - [End Date]
+**Markets Analyzed**: [US/UK/etc.]
+**Domains Analyzed**: [X competitors + your domain]
+
+**Key Findings (Top 3)**:
+
+1. **[Most Important Insight]**
+   - Data: [specific metric with % change]
+   - Impact: [business implication]
+   - Action: [immediate next step]
+
+2. **[Second Critical Insight]**
+   - Data: [specific metric]
+   - Impact: [what it means]
+   - Action: [recommended action]
+
+3. **[Third Key Finding]**
+   - Data: [metric]
+   - Impact: [implication]
+   - Action: [next step]
+
+**Traffic Performance Snapshot**:
+
+| Metric | Your Domain | Top Competitor | Industry Benchmark | Gap |
+|--------|-------------|----------------|---------------------|-----|
+| Monthly Traffic | [X] | [Y] | [Z] | [%] |
+| Keyword Portfolio | [X] | [Y] | [Z] | [%] |
+| Authority Score | [X] | [Y] | [Z] | [pts] |
+| 12M Growth Rate | [X]% | [Y]% | [Z]% | [pts] |
+
+**Critical Issues Detected** (if any):
+- 🔴 [Urgent issue requiring immediate action]
+- 🟡 [Moderate issue - address within 30 days]
+- 🟢 [Opportunity to capitalize on]
+
+**Priority Recommendations** (Ranked by ROI):
+
+**HIGH PRIORITY (Do This Week)**:
+1. [Action item] - Est. Impact: [+X% traffic or specific outcome]
+2. [Action item] - Est. Impact: [outcome]
+3. [Action item] - Est. Impact: [outcome]
+
+**MEDIUM PRIORITY (Do This Month)**:
+4. [Action item] - Est. Impact: [outcome]
+5. [Action item] - Est. Impact: [outcome]
+
+**LOW PRIORITY (Do This Quarter)**:
+6. [Action item] - Est. Impact: [outcome]
+
+**Investment Required**:
+- Time: [X hours/week]
+- Budget: [$ or resource requirements]
+- Team: [roles needed]
+
+**Expected Outcomes (90-day projection)**:
+- Traffic: +[X]% ([current] → [projected])
+- Keywords: +[X]% ([current] → [projected])
+- Authority: +[X] points ([current] → [projected])
+
+---
+
+**Section 1: Market Overview & Competitive Landscape**
+
+[Include previous Executive Overview content, expanded with:]
+
+**Competitive Positioning Matrix**:
+
+| Domain | Traffic Tier | Authority Tier | Growth Stage | Strategic Focus |
+|--------|--------------|----------------|--------------|-----------------|
+| [domain1] | Leader (Top 25%) | Strong (50+) | Mature | Market defense |
+| [domain2] | Challenger (25-50%) | Growing (30-50) | Growth | Market share gain |
+| [domain3] | Emerging (<25%) | Developing (<30) | Launch | Rapid scaling |
+
+**Market Dynamics**:
+- Total addressable market (TAM) traffic: [estimate]
+- Your current market share: [%]
+- Growth rate vs market: [faster/slower/aligned]
+- Competitive intensity: [High/Medium/Low]
+
+**Section 2: Traffic Trend Analysis** 
+[Use the enhanced format from Phase 2 with MoM% changes]
+
+**Section 3: Content, Keywords & Technical SEO**
+[Use the comprehensive analysis from Phase 3]
+
+**Add new subsections:**
+
+### Competitive Content Gap Analysis
+
+| Content Type | Your Domain | Top Competitor | Gap | Opportunity |
+|--------------|-------------|----------------|-----|-------------|
+| Blog Posts | [X] | [Y] | [Y-X] | [Est. traffic gain] |
+| Product Pages | [X] | [Y] | [Y-X] | [Est. conversion gain] |
+| Landing Pages | [X] | [Y] | [Y-X] | [Est. lead gain] |
+| Tool/Calculator Pages | [X] | [Y] | [Y-X] | [Est. engagement gain] |
+| Video Content | [X] | [Y] | [Y-X] | [Est. social gain] |
+
+### Technical SEO Scorecard
+
+| Factor | Your Domain | Top Competitor | Industry Std | Status |
+|--------|-------------|----------------|--------------|--------|
+| Page Speed (LCP) | [Xs] | [Ys] | <2.5s | ✅/⚠️/❌ |
+| Mobile Score | [X]/100 | [Y]/100 | >90 | ✅/⚠️/❌ |
+| Core Web Vitals | Pass/Fail | Pass/Fail | Pass | ✅/❌ |
+| Structured Data | [X types] | [Y types] | 5+ types | ✅/⚠️/❌ |
+| HTTPS | Yes/No | Yes/No | Yes | ✅/❌ |
+| XML Sitemap | Yes/No | Yes/No | Yes | ✅/❌ |
+
+**Section 4: Growth Strategy & Root Cause Analysis**
+
+**🚨 CRITICAL: This section MUST include Phase 6 investigation results if ANY fluctuations were detected!**
+
+**IF Phase 6 was executed (fluctuations detected):**
+- Include complete Root Cause Investigation for EACH significant fluctuation
+- Show 20+ sources per fluctuation
+- Display 5-layer search architecture results
+- Include Evidence Timeline, Confidence Scores, Primary/Secondary causes
+- NEVER write generic content like "likely due to algorithm updates" - provide SPECIFIC evidence
+
+**IF Phase 6 was skipped (no fluctuations):**
+- Document: "No significant traffic fluctuations (>15% MoM) detected during analysis period"
+- Focus on growth strategies and playbook recommendations
+
+[Use the detailed investigation from Phase 6 with 20+ sources per fluctuation]
+
+**Add new subsection:**
+
+### Growth Playbook - What's Working for Competitors
+
+**[Top Competitor Name]'s Success Factors:**
+
+1. **Content Strategy** (Est. 40% of traffic)
+   - What they're doing: [specific tactics]
+   - Volume: [X posts/month]
+   - Quality signals: [word count, multimedia, engagement]
+   - Replication cost: [$ and time]
+   - Your action: [specific steps]
+
+2. **Technical Excellence** (Est. 15% advantage)
+   - Speed optimization: [specific tech]
+   - Mobile experience: [specifics]
+   - Schema implementation: [types used]
+   - Your action: [specific steps]
+
+3. **Link Building** (Est. 25% of authority)
+   - Strategy: [PR/content/partnerships]
+   - Velocity: [X links/month]
+   - Quality: [average AS of sources]
+   - Your action: [specific steps]
+
+4. **Keyword Strategy** (Est. 20% of visibility)
+   - Targeting: [long-tail/head terms mix]
+   - Intent focus: [commercial/informational mix]
+   - Ranking speed: [time to page 1]
+   - Your action: [specific steps]
+
+**Estimated Cost to Replicate**: $[X]/month, [Y] hours/week
+**Expected Timeline**: [X] months to reach parity
+**ROI Projection**: [X]x return on investment
+
+**Section 5: Conclusions & Action Plan**
+
+### Strategic Recommendations (Prioritized by Impact/Effort)
+
+**QUICK WINS (High Impact, Low Effort)** - Do First:
+
+1. **[Recommendation Title]**
+   - What: [specific action]
+   - Why: [data-driven reason]
+   - How: [step-by-step process]
+   - Effort: [X hours]
+   - Impact: +[Y]% traffic in [Z] weeks
+   - Success Metric: [KPI to track]
+   - Status: [ ] Not Started [ ] In Progress [ ] Completed
+
+2. **[Next Quick Win]**
+   - [Same format]
+
+**HIGH IMPACT INITIATIVES (High Impact, Medium Effort)** - Do Next:
+
+3. **[Initiative Title]**
+   - [Same detailed format]
+
+4. **[Next Initiative]**
+   - [Same format]
+
+**LONG-TERM PLAYS (High Impact, High Effort)** - Plan for Q2/Q3:
+
+5. **[Strategic Initiative]**
+   - [Same format]
+
+### 90-Day Action Calendar
+
+**Week 1-2**:
+- [ ] [Specific task]
+- [ ] [Specific task]
+- [ ] [Specific task]
+
+**Week 3-4**:
+- [ ] [Specific task]
+- [ ] [Specific task]
+
+**Month 2**:
+- [ ] [Milestone]
+- [ ] [Milestone]
+
+**Month 3**:
+- [ ] [Milestone]
+- [ ] [Measurement checkpoint]
+
+### Success Metrics & KPIs
+
+Track these weekly:
+- Organic traffic: [current] → [target] (+[X]%)
+- Keyword rankings (Top 10): [current] → [target] (+[X])
+- Backlinks: [current] → [target] (+[X])
+- Authority Score: [current] → [target] (+[X] pts)
+
+**Review this report monthly and update projections based on actual results.**
+
+---
+
+**Section 6: Data Limitations & Methodology**
+[List all API failures, workarounds used, data quality notes]
+
+---
+
+**Section 7: Appendix - Detailed Data Tables**
+[Include full raw data tables for reference]
+
+**FORMATTING REQUIREMENTS:**
+
+**⚠️ HEADER NAMING CONVENTION - CRITICAL:**
+- **NO vague abbreviations**: Do NOT use "MoM %", "KW", "KWs", etc.
+- **Use complete, clear labels**:
+  - ❌ "MoM %" → ✅ "Month-over-Month" or "Month-over-Month Change"
+  - ❌ "KW" → ✅ "Keywords" or "Keyword Count"
+  - ❌ "Auth Score" → ✅ "Authority Score"
+  - ❌ "Ref. Domains" → ✅ "Referring Domains"
+  
+- **Chart dataset labels MUST include domain name + metric**:
+  - ❌ "Traffic" → ✅ "seopage.ai Monthly Traffic"
+  - ❌ "MoM %" → ✅ "writesonic.com Month-over-Month (%)"
+
+- **Avoid duplicate labels**: Do NOT use the same label for multiple datasets in one chart
+
+**⚠️ MARKDOWN TABLE FORMATTING - CRITICAL:**
+- ALWAYS add a BLANK LINE before each table
+- ALWAYS add a BLANK LINE after each table
+- Without blank lines, tables will NOT render correctly!
+
+Example (CORRECT):
+
+**Traffic Comparison**
+
+| Domain | Monthly Traffic | Keyword Count |
+|--------|---------|----------|
+| example.com | 50,000 | 1,200 |
+
+Next section starts here...
+
+**⚠️ VISUAL INDICATORS:**
+- Use ✅ ⚠️ ❌ for status (GREEN/YELLOW/RED)
+- Use ↑ ↓ → for trends (UP/DOWN/FLAT)
+- Use 🔴 🟡 🟢 for priority (URGENT/MEDIUM/LOW)
+- Use percentages with + or - sign (+15%, -10%)
+
+**⚠️ CITATION FORMAT:**
+- Inline citations: [Source Name](https://url)
+- Group related citations: [Source1](url1), [Source2](url2)
+- Add "Sources" subsection at end of each major section
+
+2. **CRITICAL: Call markdown_to_html_report tool**
+   - markdown_to_html_report(markdown=markdown_content, title="Competitor SEO Growth Engine Audit Report")
+   - DO NOT generate HTML yourself - USE THE TOOL
+   - The tool will automatically generate:
+     * Modern responsive design with sidebar navigation
+     * Chart.js visualizations
+     * Professional Blue-Teal-Purple gradient theme
+     * Mobile-responsive layout
+   
+3. **Call markdown_to_docx tool**
+   - markdown_to_docx(markdown=markdown_content, filename="competitor-audit-{timestamp}")
+   - DO NOT generate DOCX yourself - USE THE TOOL
+
+4. **🔴 MANDATORY: Update TODO status**
+   - After calling both tools above, IMMEDIATELY call todo_write
+   - Mark Phase 7 as "completed"
+   - This is NOT optional - users need to see task completion!
+
+**QUALITY CHECKLIST:**
+Before finishing, verify:
+- [ ] Executive Summary is 1 page, scannable in 2-3 minutes
+- [ ] Top 3 findings are data-driven with specific numbers
+- [ ] Priority recommendations ranked by ROI (not just listed)
+- [ ] Each recommendation has: What/Why/How/Effort/Impact/Metric
+- [ ] 90-day action calendar with specific tasks
+- [ ] All tables have blank lines before/after
+- [ ] All metrics have units (%, K, points, etc.)
+- [ ] All claims have inline citations with URLs
+- [ ] Technical SEO scorecard included
+- [ ] Competitive content gap analysis included
+- [ ] Growth playbook with replication costs
+- [ ] Success metrics clearly defined
+- [ ] markdown_to_html_report TOOL was CALLED
+- [ ] markdown_to_docx TOOL was CALLED  
+- [ ] todo_write was CALLED to mark Phase 7 completed
+
+**If missing any checklist item, fix it before finishing!**
+
+**CRITICAL CHECKPOINT:**
+Before finishing, verify:
+- [ ] All 7 Phases executed (check logs)
+- [ ] All 5 report sections present in Markdown
+- [ ] Track Benchmarking section uses "track gap" framing (NOT "you are behind")
+- [ ] markdown_to_html_report TOOL was CALLED (check tool call logs)
+- [ ] markdown_to_docx TOOL was CALLED (check tool call logs)
+- [ ] todo_write was CALLED to mark Phase 7 as completed ⚠️
+- [ ] HTML file has modern design with sidebar navigation (not simple CSS)
+- [ ] Report includes "Data Limitations" section if any APIs failed
+
+**If HTML looks simple (no sidebar, basic CSS):**
+→ You manually created HTML instead of calling the tool
+→ This is WRONG - call markdown_to_html_report tool again
+
+---

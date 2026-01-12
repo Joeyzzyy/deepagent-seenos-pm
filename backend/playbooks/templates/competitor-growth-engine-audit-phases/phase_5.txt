@@ -1,0 +1,123 @@
+**Phase 5: Track Popularity Benchmarking (REQUIRED)**
+
+**Purpose**: 
+Provide strategic context by comparing the user's industry track against a trending/high-traffic reference track.
+This helps assess whether the user's track is hot/mature/niche and set realistic SEO expectations.
+
+**CRITICAL - This is NOT a "you vs them" comparison. It's a TRACK SIZE reference.**
+
+**Execution**:
+1. perplexity_search(query="most popular trending [adjacent vertical] products high traffic SEO 2024 2025 site:ahrefs.com OR site:semrush.com")
+   → Find a trending/hot category (e.g., AI Video Generation, Project Management SaaS, etc.)
+   → Look for categories with strong organic growth
+   → Prefer categories adjacent but different from user's industry
+   → IF search fails: Document "Benchmark search unavailable" + SKIP this phase
+   
+2. Select 2-3 leading products from the benchmark track
+   → Choose well-known successful products (e.g., HeyGen for AI Video)
+   
+3. semrush_domain_overview_batch(domains=[benchmark1, benchmark2, benchmark3], database={{primary_market}})
+   → Get traffic data for benchmark track
+   → IF API fails: Document "Benchmark data unavailable" + SKIP
+   
+4. Calculate track gap metrics:
+   - Benchmark Track Avg Traffic = AVG(benchmark domains traffic)
+   - Your Track Avg Traffic = AVG(analyzed domains traffic)
+   - Track Gap Multiplier = Benchmark Avg / Your Avg
+   
+**CRITICAL REPORTING RULES FOR BENCHMARK SECTION**:
+
+❌ **NEVER use these phrases**:
+- "You are behind"
+- "You lag significantly"
+- "Your domain is weaker"
+- "You need to catch up"
+
+✅ **ALWAYS use these phrases**:
+- "Your track receives [X]x less/more traffic than benchmark track"
+- "Track gap: [X]x (indicates benchmark track is [more popular/similar/less popular])"
+- "This suggests your track is [mature/growing/niche] relative to trending categories"
+- "For reference only - not a competitive comparison"
+
+**Required Report Structure**:
+
+Output the following section in your Markdown report:
+
+---
+
+## Track Popularity Benchmarking
+
+**Purpose**: Understand your industry's relative SEO potential by comparing against a high-traffic reference track. This helps set realistic expectations and assess track competitiveness.
+
+**Benchmark Track Selected**: [Track Name] (e.g., AI Video Generation)
+**Selection Reason**: Currently trending with strong organic traffic growth in 2024-2025
+
+**Your Track**: [User's Industry]
+
+### Track Size Comparison
+
+**Complete Domain Breakdown** (All Products Side-by-Side):
+
+| Domain | Type | Monthly Traffic | Organic Keywords | Authority Score |
+|--------|------|-----------------|------------------|-----------------|
+| [your_domain1] | Your Product | [X]K | [Y]K | [Z] |
+| [your_domain2] | Your Product | [X]K | [Y]K | [Z] |
+| [competitor1] | Your Competitor | [X]K | [Y]K | [Z] |
+| [competitor2] | Your Competitor | [X]K | [Y]K | [Z] |
+| [benchmark1] | Benchmark (Hot Track) | [X]K | [Y]K | [Z] |
+| [benchmark2] | Benchmark (Hot Track) | [X]K | [Y]K | [Z] |
+| [benchmark3] | Benchmark (Hot Track) | [X]K | [Y]K | [Z] |
+
+**Track Averages**:
+
+| Track | Avg Monthly Traffic | Avg Keywords | Avg Authority | Gap vs Benchmark |
+|-------|---------------------|--------------|---------------|------------------|
+| Your Products | [X]K | [Y]K | [Z] | [W]x |
+| Your Competitors | [X]K | [Y]K | [Z] | [W]x |
+| Benchmark Track | [X]K | [Y]K | [Z] | 1.0x (baseline) |
+
+### Track Gap Interpretation
+
+**Track Multiplier**: [Z]x
+
+**What This Means**:
+
+[IF gap < 2x]:
+- Your track and the benchmark track have similar SEO potential
+- Both are attracting comparable organic traffic levels
+- Competition level may be similar
+
+[IF gap 2-5x]:
+- Moderate track size difference
+- The benchmark track is more popular currently
+- Your track may be more mature or niche
+
+[IF gap 5-10x]:
+- Significant track size difference  
+- The benchmark track is substantially more popular
+- Consider this context when setting SEO goals
+
+[IF gap > 10x]:
+- Major track popularity gap
+- The benchmark track is in an exceptionally high-growth phase
+- Your track is more established/niche or earlier stage
+
+### Strategic Context
+
+**For SEO Planning**:
+- Use benchmark traffic as a reference ceiling, not a direct goal
+- [Smaller/Similar/Larger] track size suggests [adjust strategy accordingly]
+- Set realistic growth targets based on track maturity
+
+**For Business Decisions**:
+- Track popularity doesn't determine product success
+- Niche/mature tracks can have strong monetization
+- Consider product-market fit over pure traffic volume
+
+**Note**: This benchmark compares TRACK POPULARITY, not your product quality or competitive position. Products in smaller tracks can achieve excellent business outcomes through differentiation and strong product-market fit.
+
+---
+
+**Sources**: Perplexity AI search, Semrush domain data
+
+---
