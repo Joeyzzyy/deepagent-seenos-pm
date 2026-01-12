@@ -133,17 +133,22 @@ export function ConfigDialog({
       },
     });
 
-    // 尝试保存到后端配置文件（在 Vercel 部署时会失败，这是正常的）
-    // 后端配置需要在本地手动管理
-    await saveToConfigServer({
-      provider: "azure",
-      model: azureModel,
-      azure_api_key: azureApiKey,
-      azure_base_url: azureEndpoint,
-    }).catch(() => {
-      // 在 Vercel 上无法写文件，忽略错误
-      console.log("[CONFIG] Running on Vercel, skipping backend config save");
-    });
+    // 尝试保存到后端配置文件
+    // 本地运行时：会成功，后端热重载新配置
+    // Vercel 部署时：会失败，静默忽略（后端配置需要本地手动管理）
+    if (backendUrl.includes("127.0.0.1") || backendUrl.includes("localhost")) {
+      // 只有本地开发时才尝试写配置文件
+      await saveToConfigServer({
+        provider: "azure",
+        model: azureModel,
+        azure_api_key: azureApiKey,
+        azure_base_url: azureEndpoint,
+      }).catch((err) => {
+        console.warn("[CONFIG] Failed to save backend config:", err);
+      });
+    } else {
+      console.log("[CONFIG] Remote backend detected, skipping config file save");
+    }
 
     setIsSaving(false);
     setSaveSuccess(true);
