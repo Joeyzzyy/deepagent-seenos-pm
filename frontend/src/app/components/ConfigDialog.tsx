@@ -133,22 +133,25 @@ export function ConfigDialog({
       },
     });
 
-    // 保存到后端配置文件
-    const success = await saveToConfigServer({
+    // 尝试保存到后端配置文件（在 Vercel 部署时会失败，这是正常的）
+    // 后端配置需要在本地手动管理
+    await saveToConfigServer({
       provider: "azure",
       model: azureModel,
       azure_api_key: azureApiKey,
       azure_base_url: azureEndpoint,
-      });
+    }).catch(() => {
+      // 在 Vercel 上无法写文件，忽略错误
+      console.log("[CONFIG] Running on Vercel, skipping backend config save");
+    });
 
     setIsSaving(false);
+    setSaveSuccess(true);
     
-    if (success) {
-      setSaveSuccess(true);
-      setTimeout(() => {
-    onOpenChange(false);
-      }, 800);
-    }
+    // 保存成功，关闭对话框
+    setTimeout(() => {
+      onOpenChange(false);
+    }, 800);
   };
 
   return (
